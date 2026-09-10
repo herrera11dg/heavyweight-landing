@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HeavyWeight — Camisetas de peso pesado</title>
+<title>HeavyWeight — T-shirts de peso pesado</title>
 
 <!-- SEO -->
-<meta name="description" content="Camisetas de algodón pesado (240–320 gsm) para entrenar. Corte boxy, caída firme y gramaje alto que aguanta años de rutina. Envíos a todo el país.">
+<meta name="description" content="T-shirts de algodão pesado (240–320 gsm) para treinar. Corte boxy, queda firme e gramagem alta que aguenta anos de rotina." data-i18n-content="meta_desc">
 <link rel="canonical" href="https://TU-DOMINIO.com/">
 <meta name="theme-color" content="#14110d">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="HeavyWeight">
-<meta property="og:title" content="HeavyWeight — Camisetas de peso pesado">
-<meta property="og:description" content="Camisetas de algodón pesado hechas para durar. 240–320 gsm, corte boxy, caída firme.">
+<meta property="og:title" content="HeavyWeight — T-shirts de peso pesado" data-i18n-content="meta_title">
+<meta property="og:description" content="T-shirts de algodão pesado feitas para durar." data-i18n-content="meta_desc">
 <meta property="og:url" content="https://TU-DOMINIO.com/">
 <meta property="og:image" content="https://TU-DOMINIO.com/assets/img/frontal.png">
-<meta property="og:locale" content="es_CO">
+<meta property="og:locale" content="pt_PT">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="HeavyWeight — Camisetas de peso pesado">
-<meta name="twitter:description" content="Camisetas de algodón pesado hechas para durar. 240–320 gsm, corte boxy, caída firme.">
+<meta name="twitter:title" content="HeavyWeight — T-shirts de peso pesado" data-i18n-content="meta_title">
+<meta name="twitter:description" content="T-shirts de algodão pesado feitas para durar." data-i18n-content="meta_desc">
 <meta name="twitter:image" content="https://TU-DOMINIO.com/assets/img/frontal.png">
 
 <!-- Favicon -->
@@ -43,13 +43,18 @@
 <nav>
   <div class="nav-mark">HeavyWeight</div>
   <div class="nav-links">
-    <a href="#tienda">Tienda</a>
-    <a href="envios.html">Envíos</a>
-    <a href="#contacto">Contacto</a>
+    <a href="#tienda" data-i18n="nav_shop">Loja</a>
+    <a href="envios.html" data-i18n="nav_shipping">Envios</a>
+    <a href="#contacto" data-i18n="nav_contact">Contacto</a>
   </div>
   <div class="nav-right">
-    <button class="cart-btn" id="open-cart" aria-label="Abrir carrito de compras">
-      Carrito <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button data-lang="pt" aria-label="Português" aria-pressed="true">PT</button>
+      <button data-lang="en" aria-label="English" aria-pressed="false">EN</button>
+      <button data-lang="es" aria-label="Español" aria-pressed="false">ES</button>
+    </div>
+    <button class="cart-btn" id="open-cart" aria-label="Abrir carrinho de compras">
+      <span data-i18n="cart_label">Carrinho</span> <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
     </button>
   </div>
 </nav>
@@ -57,9 +62,9 @@
 <main id="contenido">
 
 <section class="hero">
-  <div class="hero-label">Algodón pesado · serie gimnasio</div>
-  <h1 class="hero-title">Peso que<br><span>se nota.</span></h1>
-  <p class="hero-sub">Camisetas de gramaje alto, hechas para durar años de entrenamiento.</p>
+  <div class="hero-label" data-i18n="hero_label">Algodão pesado · série ginásio</div>
+  <h1 class="hero-title" data-i18n-html="hero_title">Peso que<br><span>se nota.</span></h1>
+  <p class="hero-sub" data-i18n="hero_sub">T-shirts de gramagem alta, feitas para durar anos de treino.</p>
 
   <div class="shirt-stage js-tilt">
     <div class="shirt-zoom js-zoom">
@@ -67,27 +72,27 @@
         <div class="shirt-face front">
           <picture>
             <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
-            <img src="assets/img/frontal.png" alt="Camiseta HeavyWeight Iron Core vista frontal" width="377" height="502" fetchpriority="high">
+            <img src="assets/img/frontal.png" alt="T-shirt HeavyWeight Iron Core vista frontal" width="377" height="502" fetchpriority="high">
           </picture>
         </div>
         <div class="shirt-face back">
           <picture>
             <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
-            <img src="assets/img/trasera.png" alt="Camiseta HeavyWeight Iron Core vista trasera" width="377" height="502" loading="lazy">
+            <img src="assets/img/trasera.png" alt="T-shirt HeavyWeight Iron Core vista traseira" width="377" height="502" loading="lazy">
           </picture>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="flip-hint">Clic para ver la espalda</div>
-  <div class="scroll-hint">DESLIZA</div>
+  <div class="flip-hint" data-i18n="flip_hint">Clica para ver as costas</div>
+  <div class="scroll-hint" data-i18n="scroll_hint">DESLIZE</div>
 </section>
 
 <section class="shop" id="tienda">
   <div class="shop-head">
-    <h2>Colección</h2>
-    <span>3 productos</span>
+    <h2 data-i18n="shop_title">Coleção</h2>
+    <span data-i18n="shop_count">3 produtos</span>
   </div>
 
   <div class="featured">
@@ -96,35 +101,35 @@
         <div class="face front">
           <picture>
             <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
-            <img src="assets/img/frontal.png" alt="Camiseta Iron Core vista frontal" width="377" height="502" loading="lazy">
+            <img src="assets/img/frontal.png" alt="T-shirt Iron Core vista frontal" width="377" height="502" loading="lazy">
           </picture>
         </div>
         <div class="face back">
           <picture>
             <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
-            <img src="assets/img/trasera.png" alt="Camiseta Iron Core vista trasera" width="377" height="502" loading="lazy">
+            <img src="assets/img/trasera.png" alt="T-shirt Iron Core vista traseira" width="377" height="502" loading="lazy">
           </picture>
         </div>
       </div>
-      <span class="view-tag">Clic para girar</span>
+      <span class="view-tag" data-i18n="flip_hint">Clica para girar</span>
     </div>
 
     <div class="featured-info">
-      <div class="cat">Best seller</div>
-      <h3>Iron Core</h3>
-      <div class="price">$89.000</div>
-      <div class="stock-badge" id="stock-badge">Selecciona una talla</div>
-      <p class="desc">Nuestro corte boxy de referencia. Algodón crudo de 280&nbsp;gsm, caída firme que no se deforma.</p>
+      <div class="cat" data-i18n="best_seller">Mais vendido</div>
+      <h3 data-i18n="featured_name">Iron Core</h3>
+      <div class="price" id="featured-price">39,00 €</div>
+      <div class="stock-badge" id="stock-badge">Seleciona um tamanho</div>
+      <p class="desc" data-i18n="featured_desc">O nosso corte boxy de referência. Algodão cru de 280 gsm, queda firme que não deforma.</p>
 
-      <span class="opt-label" id="color-label">Color</span>
+      <span class="opt-label" id="color-label" data-i18n="color_label">Cor</span>
       <div class="colors" id="featured-colors" role="radiogroup" aria-labelledby="color-label"></div>
 
-      <span class="opt-label" id="size-label">Talla</span>
+      <span class="opt-label" id="size-label" data-i18n="size_label">Tamanho</span>
       <div class="sizes" id="featured-sizes" role="radiogroup" aria-labelledby="size-label"></div>
 
       <div class="buy-row">
-        <button class="buy-btn" id="featured-buy">Agregar al carrito</button>
-        <button class="size-guide-link" id="size-guide-link">Guía de tallas</button>
+        <button class="buy-btn" id="featured-buy" data-i18n="buy">Adicionar ao carrinho</button>
+        <button class="size-guide-link" id="size-guide-link" data-i18n="size_guide">Guia de tamanhos</button>
       </div>
     </div>
   </div>
@@ -134,26 +139,26 @@
       <div class="card-visual js-tilt">
         <picture>
           <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
-          <img src="assets/img/trasera.png" alt="Camiseta Atlas vista trasera" width="377" height="502" loading="lazy">
+          <img src="assets/img/trasera.png" alt="T-shirt Atlas vista traseira" width="377" height="502" loading="lazy">
         </picture>
       </div>
-      <div class="card-name">Atlas</div>
+      <div class="card-name" data-i18n="atlas_name">Atlas</div>
       <div class="card-meta">
-        <span>$95.000</span>
-        <button class="add" data-product="atlas" aria-label="Agregar Atlas al carrito">Agregar</button>
+        <span data-price="atlas">45,00 €</span>
+        <button class="add" data-product="atlas" data-i18n-aria="add" data-i18n="add" aria-label="Adicionar Atlas ao carrinho">Adicionar</button>
       </div>
     </div>
     <div class="card">
       <div class="card-visual js-tilt">
         <picture>
           <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
-          <img src="assets/img/frontal.png" alt="Camiseta Grind vista frontal" width="377" height="502" loading="lazy">
+          <img src="assets/img/frontal.png" alt="T-shirt Grind vista frontal" width="377" height="502" loading="lazy">
         </picture>
       </div>
-      <div class="card-name">Grind</div>
+      <div class="card-name" data-i18n="grind_name">Grind</div>
       <div class="card-meta">
-        <span>$79.000</span>
-        <button class="add" data-product="grind" aria-label="Agregar Grind al carrito">Agregar</button>
+        <span data-price="grind">34,00 €</span>
+        <button class="add" data-product="grind" data-i18n="add" aria-label="Adicionar Grind ao carrinho">Adicionar</button>
       </div>
     </div>
   </div>
@@ -166,55 +171,60 @@
     <div class="footer-brand">Heavy<em>Weight</em></div>
     <div class="footer-links">
       <div class="footer-col">
-        <h5>Tienda</h5>
-        <a href="#tienda">Colección</a>
-        <button class="size-guide-link" data-open-modal="size-guide-modal" style="display:block;">Guía de tallas</button>
-        <a href="#tienda">Novedades</a>
+        <h5 data-i18n="footer_shop">Loja</h5>
+        <a href="#tienda" data-i18n="footer_collection">Coleção</a>
+        <button class="size-guide-link" data-open-modal="size-guide-modal" data-i18n="size_guide" style="display:block;">Guia de tamanhos</button>
+        <a href="#tienda" data-i18n="footer_new">Novidades</a>
       </div>
       <div class="footer-col">
-        <h5>Ayuda</h5>
-        <a href="envios.html">Envíos y devoluciones</a>
-        <a href="terminos.html">Términos y condiciones</a>
-        <a href="privacidad.html">Política de privacidad</a>
+        <h5 data-i18n="footer_help">Ajuda</h5>
+        <a href="envios.html" data-i18n="footer_shipping">Envios e devoluções</a>
+        <a href="termos.html" data-i18n="footer_terms">Termos e condições</a>
+        <a href="privacidade.html" data-i18n="footer_privacy">Política de privacidade</a>
       </div>
       <div class="footer-col">
-        <h5>Contacto</h5>
+        <h5 data-i18n="footer_contact">Contacto</h5>
         <a href="https://instagram.com/TU-CUENTA" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:hola@TU-DOMINIO.com">Correo</a>
+        <a href="mailto:hola@TU-DOMINIO.com">Email</a>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 HeavyWeight™ — Todos los derechos reservados</span>
-    <span>Algodón pesado · Envíos a todo el país</span>
+    <span data-i18n="footer_rights">© 2026 HeavyWeight™ — Todos os direitos reservados</span>
+    <span data-i18n="footer_tag">Algodão pesado · Envios para todo o país</span>
   </div>
 </footer>
 
 <!-- Drawer del carrito -->
 <div class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
   <div class="cart-head">
-    <h3 id="cart-title">Tu carrito</h3>
-    <button class="close" id="close-cart" aria-label="Cerrar carrito">×</button>
+    <h3 id="cart-title" data-i18n="cart_title">O teu carrinho</h3>
+    <button class="close" id="close-cart" aria-label="Fechar carrinho">×</button>
   </div>
   <div class="cart-items" id="cart-items"></div>
   <div class="cart-foot">
     <div class="cart-total">
-      <span>Total</span>
-      <span id="cart-total">$0</span>
+      <span data-i18n="cart_total">Total</span>
+      <span id="cart-total">0,00 €</span>
     </div>
-    <button class="checkout-btn" id="checkout-btn">Finalizar compra</button>
+    <button class="checkout-btn" id="checkout-btn" data-i18n="cart_checkout">Finalizar compra</button>
   </div>
 </div>
 
 <!-- Guía de tallas -->
 <div class="modal-backdrop" id="size-guide-modal" role="dialog" aria-modal="true" aria-labelledby="size-guide-title">
   <div class="modal">
-    <button class="close" data-close aria-label="Cerrar">×</button>
-    <h3 id="size-guide-title">Guía de tallas</h3>
-    <p style="color:var(--sand); margin-bottom:8px;">Medidas en centímetros. Corte boxy: recomendamos tu talla habitual.</p>
+    <button class="close" data-close aria-label="Fechar">×</button>
+    <h3 id="size-guide-title" data-i18n="sg_title">Guia de tamanhos</h3>
+    <p style="color:var(--sand); margin-bottom:8px;" data-i18n="sg_sub">Medidas em centímetros. Corte boxy: recomendamos o teu tamanho habitual.</p>
     <table class="size-table">
       <thead>
-        <tr><th>Talla</th><th>Pecho</th><th>Largo</th><th>Hombro</th></tr>
+        <tr>
+          <th data-i18n="sg_size">Tamanho</th>
+          <th data-i18n="sg_chest">Peito</th>
+          <th data-i18n="sg_length">Comprimento</th>
+          <th data-i18n="sg_shoulder">Ombro</th>
+        </tr>
       </thead>
       <tbody>
         <tr><td>S</td><td>104</td><td>68</td><td>47</td></tr>
@@ -229,27 +239,27 @@
 <!-- Checkout -->
 <div class="modal-backdrop" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
   <div class="modal">
-    <button class="close" data-close aria-label="Cerrar">×</button>
-    <h3 id="checkout-title">Finalizar compra</h3>
+    <button class="close" data-close aria-label="Fechar">×</button>
+    <h3 id="checkout-title" data-i18n="co_title">Finalizar compra</h3>
     <form id="checkout-form">
       <div class="form-group">
-        <label for="f-name">Nombre completo</label>
+        <label for="f-name" data-i18n="co_name">Nome completo</label>
         <input type="text" id="f-name" name="name" autocomplete="name" required>
       </div>
       <div class="form-group">
-        <label for="f-email">Correo</label>
+        <label for="f-email" data-i18n="co_email">Email</label>
         <input type="email" id="f-email" name="email" autocomplete="email" required>
       </div>
       <div class="form-group">
-        <label for="f-phone">Teléfono</label>
+        <label for="f-phone" data-i18n="co_phone">Telefone</label>
         <input type="tel" id="f-phone" name="phone" autocomplete="tel">
       </div>
       <div class="form-group">
-        <label for="f-address">Dirección de envío</label>
+        <label for="f-address" data-i18n="co_address">Morada de envio</label>
         <input type="text" id="f-address" name="address" autocomplete="street-address" required>
       </div>
-      <p id="checkout-error" style="display:none; color:var(--copper); font-size:13px; margin-bottom:12px;">Completa nombre, correo y dirección.</p>
-      <button type="submit" class="checkout-btn">Confirmar pedido</button>
+      <p id="checkout-error" style="display:none; color:var(--copper); font-size:13px; margin-bottom:12px;" data-i18n="co_error">Preenche nome, email e morada.</p>
+      <button type="submit" class="checkout-btn" data-i18n="co_confirm">Confirmar pedido</button>
     </form>
   </div>
 </div>
@@ -257,25 +267,26 @@
 <!-- Confirmación -->
 <div class="modal-backdrop" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="order-title">
   <div class="modal" style="text-align:center;">
-    <button class="close" data-close aria-label="Cerrar">×</button>
-    <h3 id="order-title">¡Gracias por tu compra!</h3>
-    <p style="color:var(--sand); margin-bottom:8px;">Tu pedido fue registrado con el número</p>
+    <button class="close" data-close aria-label="Fechar">×</button>
+    <h3 id="order-title" data-i18n="order_title">Obrigado pela tua compra!</h3>
+    <p style="color:var(--sand); margin-bottom:8px;" data-i18n="order_text">O teu pedido foi registado com o número</p>
     <p style="font-family:'Space Mono',monospace; font-size:24px; color:var(--copper); margin-bottom:16px;" id="order-number">—</p>
-    <p style="color:var(--stone); font-size:14px;">Te contactaremos para coordinar el pago y el envío.</p>
+    <p style="color:var(--stone); font-size:14px;" data-i18n="order_note">Vamos contactar-te para coordenar o pagamento e o envio.</p>
   </div>
 </div>
 
 <!-- Banner de cookies -->
 <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Aviso de cookies">
-  <p>Usamos cookies para mejorar tu experiencia y, con tu consentimiento, para analítica (Google Analytics / Meta Pixel). Consulta nuestra <a href="privacidad.html" style="color:var(--copper);">política de privacidad</a>.</p>
+  <p data-i18n-html="cookie_text">Usamos cookies para melhorar a tua experiência e, com o teu consentimento, para analítica (Google Analytics / Meta Pixel). Consulta a nossa <a href="privacidade.html" style="color:var(--copper);">política de privacidade</a>.</p>
   <div class="cookie-actions">
-    <button class="btn btn-ghost" id="cookies-reject">Solo esenciales</button>
-    <button class="btn btn-primary" id="cookies-accept">Aceptar</button>
+    <button class="btn btn-ghost" id="cookies-reject" data-i18n="cookie_essential">Só essenciais</button>
+    <button class="btn btn-primary" id="cookies-accept" data-i18n="cookie_accept">Aceitar</button>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

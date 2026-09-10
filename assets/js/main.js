@@ -3,31 +3,29 @@
    GSAP (parallax, tilt) + e-commerce (carrito, tallas, checkout)
    ============================================================ */
 
-/* ---------- Catálogo ---------- */
+/* ---------- Catálogo (precios en euros) ---------- */
 const PRODUCTS = {
   'iron-core': {
     name: 'Iron Core',
-    price: 89000,
+    price: 39,
     gsm: 280,
     colors: ['#14110d', '#3a3733', '#8a8578'],
-    colorNames: ['Negro', 'Grafito', 'Gris pardo'],
+    colorNames: ['color_black', 'color_graphite', 'color_taupe'],
     sizes: { S: 5, M: 9, L: 7, XL: 2 }
   },
   'atlas': {
     name: 'Atlas',
-    price: 95000,
+    price: 45,
     gsm: 320,
     sizes: { S: 3, M: 6, L: 4, XL: 0 }
   },
   'grind': {
     name: 'Grind',
-    price: 79000,
+    price: 34,
     gsm: 240,
     sizes: { S: 8, M: 11, L: 9, XL: 5 }
   }
 };
-
-const formatPrice = (n) => '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
 /* ---------- Estado del carrito (localStorage) ---------- */
 const CART_KEY = 'heavyweight_cart';
@@ -96,22 +94,22 @@ function renderCart() {
   const cart = getCart();
 
   if (cart.length === 0) {
-    wrap.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>';
+    wrap.innerHTML = `<p class="cart-empty">${t('cart_empty')}</p>`;
   } else {
     wrap.innerHTML = cart.map((i) => `
       <div class="cart-item">
         <img src="${i.img}" alt="" width="60" height="80" loading="lazy">
         <div class="cart-item-info">
           <div class="cart-item-name">${i.name}</div>
-          <div class="cart-item-var">${i.size ? 'Talla ' + i.size : ''}${i.color ? ' · ' + i.color : ''}</div>
+          <div class="cart-item-var">${i.size ? t('size_prefix') + ' ' + i.size : ''}${i.color ? ' · ' + t(i.color) : ''}</div>
           <div class="cart-item-price">${formatPrice(i.price)}</div>
           <div class="cart-qty">
-            <button data-dec="${i.key}" aria-label="Disminuir cantidad">−</button>
+            <button data-dec="${i.key}" aria-label="${t('cart_dec')}">−</button>
             <span>${i.qty}</span>
-            <button data-inc="${i.key}" aria-label="Aumentar cantidad">+</button>
+            <button data-inc="${i.key}" aria-label="${t('cart_inc')}">+</button>
           </div>
         </div>
-        <button class="cart-remove" data-rm="${i.key}" aria-label="Eliminar del carrito">×</button>
+        <button class="cart-remove" data-rm="${i.key}" aria-label="${t('cart_remove')}">×</button>
       </div>
     `).join('');
   }
@@ -135,7 +133,7 @@ function placeOrder(form) {
   if (!order.name || !order.email || !order.address) return false;
 
   // Simulación: en producción conectarías aquí un procesador de pago
-  // (Stripe, MercadoPago, etc.) y un backend para persistir el pedido.
+  // (Stripe, MB WAY, etc.) y un backend para persistir el pedido.
   const orderNumber = 'HW-' + Date.now().toString().slice(-6);
   saveCart([]);
   updateCartBadge();
@@ -143,6 +141,8 @@ function placeOrder(form) {
 }
 
 /* ---------- Selector de talla/color (producto destacado) ---------- */
+let renderFeatured = function () {};
+
 function initFeatured() {
   const sizesWrap = document.getElementById('featured-sizes');
   const colorsWrap = document.getElementById('featured-colors');
@@ -152,73 +152,79 @@ function initFeatured() {
   let selectedSize = null;
   let selectedColor = p.colorNames[0];
 
-  function renderSizes() {
+  renderFeatured = function () {
+    // tallas
     sizesWrap.innerHTML = Object.entries(p.sizes).map(([size, stock]) => `
       <button class="size ${selectedSize === size ? 'active' : ''}"
         data-size="${size}" ${stock === 0 ? 'disabled' : ''}
-        aria-label="Talla ${size}">${size}</button>
+        aria-label="${t('size_label')} ${size}">${size}</button>
     `).join('');
-  }
 
-  function renderColors() {
+    // colores
     colorsWrap.innerHTML = p.colors.map((c, idx) => `
       <button class="color ${selectedColor === p.colorNames[idx] ? 'active' : ''}"
-        data-color="${p.colorNames[idx]}" role="radio" aria-checked="${selectedColor === p.colorNames[idx]}"
-        aria-label="Color ${p.colorNames[idx]}">
+        data-color="${p.colorNames[idx]}" aria-label="${t('color_label')} ${t(p.colorNames[idx])}">
         <span class="swatch" style="background:${c}"></span>
       </button>
     `).join('');
-  }
 
-  function updateStock() {
+    // stock
     if (!selectedSize) {
-      stockBadge.textContent = 'Selecciona una talla';
+      stockBadge.textContent = t('stock_select');
       stockBadge.className = 'stock-badge';
       buyBtn.disabled = true;
-      return;
-    }
-    const stock = p.sizes[selectedSize];
-    if (stock === 0) {
-      stockBadge.textContent = 'Agotado';
-      stockBadge.className = 'stock-badge low';
-      buyBtn.disabled = true;
-    } else if (stock <= 3) {
-      stockBadge.textContent = `Solo quedan ${stock} en esta talla`;
-      stockBadge.className = 'stock-badge low';
-      buyBtn.disabled = false;
     } else {
-      stockBadge.textContent = 'En stock';
-      stockBadge.className = 'stock-badge';
-      buyBtn.disabled = false;
+      const stock = p.sizes[selectedSize];
+      if (stock === 0) {
+        stockBadge.textContent = t('stock_out');
+        stockBadge.className = 'stock-badge low';
+        buyBtn.disabled = true;
+      } else if (stock <= 3) {
+        stockBadge.textContent = t('stock_low', { n: stock });
+        stockBadge.className = 'stock-badge low';
+        buyBtn.disabled = false;
+      } else {
+        stockBadge.textContent = t('stock_in');
+        stockBadge.className = 'stock-badge';
+        buyBtn.disabled = false;
+      }
     }
-  }
+
+    buyBtn.textContent = t('buy');
+  };
 
   sizesWrap.addEventListener('click', (e) => {
     const btn = e.target.closest('.size');
     if (!btn || btn.disabled) return;
     selectedSize = btn.dataset.size;
-    renderSizes();
-    updateStock();
+    renderFeatured();
   });
 
   colorsWrap.addEventListener('click', (e) => {
     const btn = e.target.closest('.color');
     if (!btn) return;
     selectedColor = btn.dataset.color;
-    renderColors();
+    renderFeatured();
   });
 
   buyBtn.addEventListener('click', () => {
-    if (!selectedSize) { updateStock(); return; }
+    if (!selectedSize) { renderFeatured(); return; }
     addToCart('iron-core', selectedSize, selectedColor);
     buyBtn.classList.add('added');
-    buyBtn.textContent = 'Agregado';
-    setTimeout(() => { buyBtn.classList.remove('added'); buyBtn.textContent = 'Agregar al carrito'; }, 1400);
+    buyBtn.textContent = t('added');
+    setTimeout(() => { buyBtn.classList.remove('added'); buyBtn.textContent = t('buy'); }, 1400);
   });
 
-  renderSizes();
-  renderColors();
-  updateStock();
+  renderFeatured();
+}
+
+/* ---------- Precios dinámicos ---------- */
+function renderPrices() {
+  const fp = document.getElementById('featured-price');
+  if (fp) fp.textContent = formatPrice(PRODUCTS['iron-core'].price);
+  document.querySelectorAll('[data-price]').forEach((el) => {
+    el.textContent = formatPrice(PRODUCTS[el.dataset.price].price);
+  });
 }
 
 /* ---------- Grid de productos ---------- */
@@ -279,7 +285,6 @@ function initAnimations() {
   gsap.from('.featured-visual', { x: 60, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.featured', start: 'top 70%' } });
   gsap.from('.card', { y: 60, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.15, scrollTrigger: { trigger: '.grid', start: 'top 75%' } });
 
-  // Tilt 3D + parallax de profundidad por elemento
   function initTilt(stage) {
     if (isTouch) return;
     const rotY = gsap.quickTo(stage, 'rotationY', { duration: 0.5, ease: 'power3' });
@@ -308,7 +313,7 @@ function initFlips() {
     flip.addEventListener('click', toggle);
     flip.setAttribute('role', 'button');
     flip.setAttribute('tabindex', '0');
-    flip.setAttribute('aria-label', 'Girar la camiseta para ver la espalda');
+    flip.setAttribute('aria-label', t('flip_hint'));
     flip.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
     });
@@ -319,6 +324,7 @@ function initFlips() {
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge();
   renderCart();
+  renderPrices();
   initFeatured();
   initGrid();
   initCookies();
@@ -379,6 +385,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initAnimations();
 });
+
+/* Re-render al cambiar de idioma */
+window.onLanguageChange = function () {
+  renderCart();
+  renderPrices();
+  renderFeatured();
+};
 
 /* Refrescar ScrollTrigger tras cargar imágenes */
 window.addEventListener('load', () => { if (window.ScrollTrigger) ScrollTrigger.refresh(); });
