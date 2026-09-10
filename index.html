@@ -162,34 +162,58 @@
     margin-bottom:2px;
   }
 
+  /* --- Estructura 3D de la prenda --- */
   .garment-wrap{
     display:flex;
     align-items:center;
     justify-content:center;
+    flex-direction:column;
+    gap:24px;
     height:100%;
+    perspective:1400px;
   }
-
-  .garment-tilt{
-    perspective:1200px;
-    transform-style:preserve-3d;
-    will-change:transform;
+  .tilt{
     width:78%;
     max-width:520px;
-  }
-
-  .garment{
-    border-radius:6px;
-    overflow:hidden;
-    filter:drop-shadow(0 40px 60px rgba(0,0,0,0.5));
-    will-change:transform;
+    aspect-ratio:3 / 4;
     transform-style:preserve-3d;
+    will-change:transform;
     cursor:grab;
   }
-  .garment img{
+  .flip{
+    position:relative;
     width:100%;
-    height:auto;
+    height:100%;
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+  .face{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 40px 80px rgba(0,0,0,0.55);
+  }
+  .face img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
     display:block;
     pointer-events:none;
+  }
+  .face-back{transform:rotateY(180deg);}
+
+  .view-label{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.15em;
+    color:var(--concrete);
+    text-transform:uppercase;
+  }
+  .view-label em{
+    font-style:normal;
+    color:var(--oxide);
   }
 
   .panel:nth-child(odd) .panel-info{order:1;}
@@ -206,7 +230,7 @@
     nav{padding:20px 24px;}
     .nav-links{display:none;}
     .hero{padding:0 24px;}
-    .garment-tilt{width:88%;}
+    .tilt{width:88%;}
   }
 
   /* ---------- MATERIAL BAND ---------- */
@@ -309,11 +333,13 @@
       </div>
     </div>
     <div class="garment-wrap">
-      <div class="garment-tilt js-tilt">
-        <div class="garment js-garment">
-          <img src="GYM.jpg" alt="Camiseta Heavyweight Iron Core — espalda y frente">
+      <div class="tilt js-tilt">
+        <div class="flip js-flip">
+          <div class="face face-front"><img src="front.jpg" alt="Frente — Camiseta Iron Core"></div>
+          <div class="face face-back"><img src="back.jpg" alt="Espalda — Camiseta Iron Core"></div>
         </div>
       </div>
+      <div class="view-label">Vista <em>frontal</em></div>
     </div>
   </div>
 
@@ -352,40 +378,44 @@
     gsap.from('.hero h1', {y:60, opacity:0, duration:1, ease:'power3.out', delay:0.1});
     gsap.from('.hero-tag, .hero-foot', {y:20, opacity:0, duration:0.8, ease:'power3.out', delay:0.4, stagger:0.1});
 
-    /* Scroll parallax: scale + clipPath en .garment (elemento interno) */
-    document.querySelectorAll('.js-garment').forEach((garment) => {
-      gsap.fromTo(garment,
-        { scale: 0.72, clipPath: 'inset(6% 6% 6% 6% round 4px)' },
-        {
-          scale: 1.12,
-          clipPath: 'inset(0% 0% 0% 0% round 0px)',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: garment.closest('.panel'),
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1
-          }
-        }
-      );
-    });
+    const panel = document.querySelector('.panel');
+    const flip = document.querySelector('.js-flip');
+    const faces = document.querySelectorAll('.face');
+    const label = document.querySelector('.view-label em');
 
-    document.querySelectorAll('.panel-info').forEach((info) => {
-      gsap.fromTo(info,
-        { y: 60, opacity: 0.4 },
-        {
-          y: -40,
-          opacity: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: info.closest('.panel'),
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1
-          }
+    /* --- Flip 3D + expansión + parallax + brillo, ligados al scroll --- */
+    const panelTrigger = {
+      trigger: panel,
+      start: 'top 80%',
+      end: 'bottom 20%',
+      scrub: 1
+    };
+
+    gsap.fromTo(flip,
+      { scale: 0.55, y: 80, opacity: 0.3, rotateY: 0 },
+      {
+        scale: 1.25,
+        y: -40,
+        opacity: 1,
+        rotateY: 180,
+        ease: 'none',
+        scrollTrigger: panelTrigger,
+        onUpdate: function(){
+          label.textContent = this.progress() < 0.5 ? 'frontal' : 'trasera';
         }
-      );
-    });
+      }
+    );
+
+    gsap.fromTo(faces,
+      { filter: 'brightness(0.45)' },
+      { filter: 'brightness(1)', ease: 'none', scrollTrigger: panelTrigger }
+    );
+
+    /* --- Parallax del panel-info (sentido contrario) --- */
+    gsap.fromTo('.panel-info',
+      { y: 60, opacity: 0.4 },
+      { y: -40, opacity: 1, ease: 'none', scrollTrigger: panelTrigger }
+    );
 
     gsap.from('.band h3', {
       y: 40, opacity: 0, duration: 1, ease: 'power3.out',
@@ -397,7 +427,7 @@
       scrollTrigger: { trigger: 'footer', start: 'top 80%' }
     });
 
-    /* Mouse tilt 3D en .garment-tilt (elemento externo, separado del scroll) */
+    /* --- Mouse tilt 3D (desktop) --- */
     if(!isTouch){
       document.querySelectorAll('.js-tilt').forEach((tiltEl) => {
         const xTo = gsap.quickTo(tiltEl, "rotationY", {duration: 0.6, ease: "power3"});
@@ -407,8 +437,8 @@
           const rect = tiltEl.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width  - 0.5;
           const y = (e.clientY - rect.top)  / rect.height - 0.5;
-          xTo(x * 28);
-          yTo(-y * 18);
+          xTo(x * 24);
+          yTo(-y * 16);
         });
 
         tiltEl.addEventListener("mouseleave", () => {
@@ -418,13 +448,13 @@
       });
     }
 
-    /* Tilt por giroscopio en mobile */
+    /* --- Tilt por giroscopio (mobile) --- */
     if(isTouch && window.DeviceOrientationEvent){
       window.addEventListener('deviceorientation', (e) => {
         const ry = Math.max(-1, Math.min(1, (e.gamma || 0) / 30));
         const rx = Math.max(-1, Math.min(1, (e.beta  || 0) / 30));
         document.querySelectorAll('.js-tilt').forEach((tiltEl) => {
-          gsap.to(tiltEl, { rotationY: ry * 22, rotationX: -rx * 16, duration: 0.4, ease:'power2.out' });
+          gsap.to(tiltEl, { rotationY: ry * 18, rotationX: -rx * 12, duration: 0.4, ease:'power2.out' });
         });
       }, true);
     }
