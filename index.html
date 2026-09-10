@@ -6,15 +6,15 @@
 <title>HEAVYWEIGHT — Camisetas de peso pesado</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --charcoal:#14130f;
-    --iron:#1f1d17;
-    --concrete:#8c8577;
-    --chalk:#efeae0;
+    --black:#0b0a08;
+    --iron:#1a1712;
+    --grey:#8a8578;
+    --chalk:#f5f1ea;
+    --red:#d90429;
     --oxide:#b3441f;
-    --steel:#545049;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -22,18 +22,23 @@
   html{scroll-behavior:auto;}
 
   body{
-    background:var(--charcoal);
+    background:var(--black);
     color:var(--chalk);
     font-family:'Inter',sans-serif;
     overflow-x:hidden;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  /* Textura de ruido tipo gimnasio underground */
+  body::after{
+    content:"";
+    position:fixed; top:0; left:0; width:100vw; height:100vh;
+    background-image:url('https://www.transparenttextures.com/patterns/stardust.png');
+    opacity:0.12;
+    pointer-events:none;
+    z-index:999;
   }
 
-  ::selection{background:var(--oxide); color:var(--chalk);}
-
+  ::selection{background:var(--red); color:var(--chalk);}
   a{color:inherit; text-decoration:none;}
 
   /* ---------- NAV ---------- */
@@ -43,72 +48,120 @@
     padding:28px 48px;
     mix-blend-mode:difference;
   }
-  .nav-mark{
-    font-family:'Archivo Black',sans-serif;
-    font-size:18px; letter-spacing:0.02em;
-  }
+  .nav-mark{font-family:'Archivo Black',sans-serif; font-size:18px; letter-spacing:0.02em;}
   .nav-links{display:flex; gap:32px; font-size:13px; font-weight:600;}
   .nav-links span{opacity:0.55; font-family:'Space Mono',monospace;}
 
   /* ---------- HERO ---------- */
   .hero{
-    min-height:100vh;
+    height:100vh;
     display:flex;
     flex-direction:column;
+    align-items:center;
     justify-content:center;
-    padding:0 48px;
     position:relative;
+    overflow:hidden;
   }
-  .hero-tag{
-    font-family:'Space Mono',monospace;
-    font-size:13px;
-    color:var(--concrete);
-    margin-bottom:24px;
-  }
-  .hero-tag em{color:var(--oxide); font-style:normal;}
 
-  .hero h1{
+  .hero-bg{
+    position:absolute;
+    z-index:1;
+    font-family:'Anton',sans-serif;
+    font-size:15vw;
+    color:#2a2722;
+    text-transform:uppercase;
+    white-space:nowrap;
+    letter-spacing:-2px;
+    user-select:none;
+    pointer-events:none;
+  }
+
+  .hero-title{
+    position:relative;
+    z-index:2;
     font-family:'Archivo Black',sans-serif;
-    font-size:clamp(52px,11vw,168px);
-    line-height:0.88;
+    font-size:clamp(48px,9vw,130px);
+    line-height:0.9;
+    text-align:center;
+    text-transform:uppercase;
     letter-spacing:-0.01em;
-    max-width:1200px;
+    margin-top:-6vh;
+  }
+  .hero-title em{
+    font-style:normal;
+    color:var(--red);
   }
 
-  .hero-foot{
-    margin-top:48px;
+  /* --- Estructura 3D de la camiseta --- */
+  .shirt-stage{
+    position:relative;
+    z-index:3;
+    perspective:1400px;
+    transform-style:preserve-3d;
+    cursor:grab;
+    height:70vh;
     display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    max-width:1200px;
-    border-top:1px solid rgba(239,234,224,0.15);
-    padding-top:24px;
+    align-items:center;
+    justify-content:center;
+    margin-top:-6vh;
   }
-  .hero-desc{
-    max-width:420px;
-    font-size:16px;
-    line-height:1.5;
-    color:var(--concrete);
+  .shirt-zoom{
+    transform-style:preserve-3d;
+    will-change:transform;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
-  .hero-spec{
-    font-family:'Space Mono',monospace;
-    font-size:13px;
-    text-align:right;
-    color:var(--concrete);
+  .shirt-flip{
+    position:relative;
+    transform-style:preserve-3d;
+    transition:transform 0.9s cubic-bezier(0.65,0,0.35,1);
+    will-change:transform;
   }
-  .hero-spec strong{color:var(--chalk); display:block; font-size:34px; font-family:'Archivo Black',sans-serif; margin-bottom:2px;}
+  .shirt-flip.is-flipped{transform:rotateY(180deg);}
 
-  .scroll-hint{
-    position:absolute; bottom:40px; left:48px;
+  .shirt-face{
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    height:70vh;
+    width:auto;
+    display:block;
+    filter:drop-shadow(0 30px 50px rgba(0,0,0,0.85));
+    pointer-events:none;
+  }
+  .shirt-face.back{
+    position:absolute;
+    top:0; left:50%;
+    transform:translateX(-50%) rotateY(180deg);
+  }
+
+  .flip-hint{
+    position:absolute;
+    z-index:4;
+    bottom:14vh;
+    left:50%;
+    transform:translateX(-50%);
     font-family:'Space Mono',monospace;
     font-size:12px;
-    color:var(--concrete);
+    letter-spacing:0.12em;
+    color:var(--grey);
+    text-transform:uppercase;
+    pointer-events:none;
+  }
+
+  .scroll-hint{
+    position:absolute; bottom:40px; left:50%;
+    transform:translateX(-50%);
+    z-index:4;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    color:var(--grey);
     display:flex; align-items:center; gap:10px;
   }
   .scroll-hint::after{
     content:'';
     width:1px; height:34px;
-    background:var(--concrete);
+    background:var(--grey);
     animation:scrollpulse 1.8s ease-in-out infinite;
   }
   @keyframes scrollpulse{
@@ -116,117 +169,96 @@
     50%{transform:scaleY(0.4); opacity:1;}
   }
 
-  /* ---------- PRODUCT PANEL ---------- */
-  .panel{
-    min-height:120vh;
+  /* ---------- IMPACTO ---------- */
+  .impact{
+    height:100vh;
+    background:var(--red);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:0 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .impact h2{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(56px,11vw,160px);
+    line-height:0.9;
+    text-transform:uppercase;
+    color:#0b0a08;
+  }
+  .impact p{
+    margin-top:24px;
+    font-family:'Space Mono',monospace;
+    font-size:14px;
+    color:rgba(11,10,8,0.7);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+
+  /* ---------- PRODUCTO ---------- */
+  .product{
+    min-height:100vh;
     display:grid;
     grid-template-columns:1fr 1fr;
     align-items:center;
-    gap:40px;
-    padding:0 48px;
-    position:relative;
-    overflow:visible;
+    gap:48px;
+    padding:120px 48px;
   }
-  .panel-info{position:relative; z-index:2;}
-  .panel-index{
-    font-family:'Space Mono',monospace;
-    font-size:13px;
-    color:var(--oxide);
-    margin-bottom:18px;
-  }
-  .panel h2{
+  .product-info h3{
     font-family:'Archivo Black',sans-serif;
     font-size:clamp(36px,5vw,64px);
     line-height:0.95;
     margin-bottom:20px;
+    text-transform:uppercase;
   }
-  .panel p{
-    color:var(--concrete);
+  .product-info .tag{
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    color:var(--red);
+    margin-bottom:18px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  .product-info p{
+    color:var(--grey);
     font-size:15px;
     line-height:1.6;
-    max-width:360px;
+    max-width:380px;
     margin-bottom:28px;
   }
-  .panel-specs{
+  .specs{
     display:flex;
-    gap:28px;
+    gap:32px;
     font-family:'Space Mono',monospace;
     font-size:12px;
-    color:var(--concrete);
+    color:var(--grey);
   }
-  .panel-specs div strong{
+  .specs div strong{
     display:block;
     color:var(--chalk);
-    font-size:20px;
+    font-size:22px;
     font-family:'Archivo Black',sans-serif;
     margin-bottom:2px;
   }
-
-  /* --- Estructura 3D de la prenda --- */
-  .garment-wrap{
+  .product-visual{
     display:flex;
     align-items:center;
     justify-content:center;
-    flex-direction:column;
-    gap:24px;
     height:100%;
-    perspective:1400px;
-    position:relative;
-    z-index:1;
   }
-  .tilt{
-    width:78%;
-    max-width:520px;
-    aspect-ratio:3 / 4;
-    transform-style:preserve-3d;
-    will-change:transform;
-    cursor:grab;
-  }
-  .flip{
-    position:relative;
-    width:100%;
-    height:100%;
-    transform-style:preserve-3d;
-    will-change:transform;
-  }
-  .face{
-    position:absolute; inset:0;
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
-    border-radius:6px;
-    overflow:hidden;
-    box-shadow:0 40px 80px rgba(0,0,0,0.55);
-  }
-  .face img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    pointer-events:none;
-  }
-  .face-back{transform:rotateY(180deg);}
-
-  .panel:nth-child(odd) .panel-info{order:1;}
-  .panel:nth-child(odd) .garment-wrap{order:2;}
-  .panel:nth-child(even) .panel-info{order:2;}
-  .panel:nth-child(even) .garment-wrap{order:1;}
-
-  @media (max-width:860px){
-    .panel{grid-template-columns:1fr; padding:80px 24px; gap:24px;}
-    .panel:nth-child(odd) .panel-info,
-    .panel:nth-child(even) .panel-info{order:2;}
-    .panel:nth-child(odd) .garment-wrap,
-    .panel:nth-child(even) .garment-wrap{order:1;}
-    nav{padding:20px 24px;}
-    .nav-links{display:none;}
-    .hero{padding:0 24px;}
-    .tilt{width:88%;}
+  .product-visual img{
+    height:80vh;
+    width:auto;
+    filter:drop-shadow(0 40px 60px rgba(0,0,0,0.7));
   }
 
   /* ---------- MATERIAL BAND ---------- */
   .band{
     background:var(--chalk);
-    color:var(--charcoal);
+    color:var(--black);
     padding:120px 48px;
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -237,40 +269,40 @@
     font-size:clamp(32px,4vw,52px);
     line-height:1.05;
     max-width:520px;
+    text-transform:uppercase;
   }
-  .band-list{border-top:1px solid rgba(20,19,15,0.15);}
+  .band-list{border-top:1px solid rgba(11,10,8,0.15);}
   .band-list div{
     display:flex; justify-content:space-between;
     padding:20px 0;
-    border-bottom:1px solid rgba(20,19,15,0.15);
+    border-bottom:1px solid rgba(11,10,8,0.15);
     font-size:15px;
   }
-  .band-list span:first-child{color:var(--steel);}
+  .band-list span:first-child{color:#5a554c;}
   .band-list span:last-child{font-family:'Space Mono',monospace; font-weight:700;}
 
-  @media (max-width:860px){
-    .band{grid-template-columns:1fr; padding:80px 24px;}
-  }
-
-  /* ---------- FOOTER CTA ---------- */
+  /* ---------- FOOTER ---------- */
   footer{
     padding:140px 48px 60px;
     text-align:center;
   }
   footer h4{
-    font-family:'Archivo Black',sans-serif;
-    font-size:clamp(40px,8vw,110px);
+    font-family:'Anton',sans-serif;
+    font-size:clamp(48px,10vw,130px);
     line-height:0.9;
+    text-transform:uppercase;
     margin-bottom:40px;
   }
+  footer h4 em{font-style:normal; color:var(--red);}
   .cta-btn{
     display:inline-block;
-    background:var(--oxide);
+    background:var(--red);
     color:var(--chalk);
     font-weight:700;
     font-size:15px;
     padding:20px 44px;
     border-radius:2px;
+    letter-spacing:0.04em;
   }
   .foot-meta{
     margin-top:100px;
@@ -278,11 +310,23 @@
     justify-content:space-between;
     font-family:'Space Mono',monospace;
     font-size:12px;
-    color:var(--steel);
-    border-top:1px solid rgba(239,234,224,0.1);
+    color:var(--grey);
+    border-top:1px solid rgba(245,241,234,0.1);
     padding-top:24px;
   }
+
+  /* ---------- RESPONSIVE ---------- */
   @media (max-width:860px){
+    nav{padding:20px 24px;}
+    .nav-links{display:none;}
+    .hero-bg{font-size:18vw;}
+    .shirt-stage{height:56vh; margin-top:-2vh;}
+    .shirt-face{height:56vh;}
+    .product{grid-template-columns:1fr; padding:80px 24px; gap:32px;}
+    .product-visual{order:1;}
+    .product-info{order:2;}
+    .product-visual img{height:60vh;}
+    .band{grid-template-columns:1fr; padding:80px 24px;}
     footer{padding:100px 24px 40px;}
     .foot-meta{flex-direction:column; gap:8px;}
   }
@@ -300,41 +344,45 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-tag">Algodón crudo, corte recto <em>· serie gimnasio</em></div>
-  <h1>PESO<br>QUE SE<br>NOTA.</h1>
-  <div class="hero-foot">
-    <p class="hero-desc">Camisetas construidas para levantar, no para lucir frágiles. Tela densa, costura reforzada, caída que no se deforma con el sudor ni el lavado.</p>
-    <div class="hero-spec"><strong>320g</strong>/m² máximo</div>
+  <div class="hero-bg js-bg">One More Rep</div>
+
+  <h1 class="hero-title">Peso que<br><em>se nota.</em></h1>
+
+  <div class="shirt-stage js-tilt">
+    <div class="shirt-zoom js-zoom">
+      <div class="shirt-flip js-flip">
+        <img class="shirt-face front" src="frontal.png" alt="Camiseta Heavyweight — frontal">
+        <img class="shirt-face back" src="trasera.png" alt="Camiseta Heavyweight — trasera">
+      </div>
+    </div>
   </div>
+
+  <div class="flip-hint">Clic para ver espalda</div>
   <div class="scroll-hint">DESLIZA</div>
 </section>
 
-<section id="coleccion">
-
-  <div class="panel" data-tint="oxide">
-    <div class="panel-info">
-      <div class="panel-index">01 — IRON CORE</div>
-      <h2>La de<br>entrenamiento.</h2>
-      <p>Corte boxy, cuello reforzado triple costura. La que aguanta el peso muerto y no se estira en los hombros.</p>
-      <div class="panel-specs">
-        <div><strong>280g</strong>densidad</div>
-        <div><strong>100%</strong>algodón crudo</div>
-        <div><strong>S–XXL</strong>tallas</div>
-      </div>
-    </div>
-    <div class="garment-wrap">
-      <div class="tilt js-tilt">
-        <div class="flip js-flip">
-          <div class="face face-front"><img src="front.jpg" alt="Frente — Camiseta Iron Core"></div>
-          <div class="face face-back"><img src="back.jpg" alt="Espalda — Camiseta Iron Core"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<section class="impact">
+  <h2>Domina el<br>peso.</h2>
+  <p>Camisetas construidas para levantar, no para lucir frágiles.</p>
 </section>
 
-<section id="material" class="band">
+<section class="product" id="coleccion">
+  <div class="product-info js-info">
+    <div class="tag">01 — Iron Core</div>
+    <h3>La de<br>entrenamiento.</h3>
+    <p>Corte boxy, cuello reforzado triple costura. La que aguanta el peso muerto y no se estira en los hombros.</p>
+    <div class="specs">
+      <div><strong>280g</strong>densidad</div>
+      <div><strong>100%</strong>algodón crudo</div>
+      <div><strong>S–XXL</strong>tallas</div>
+    </div>
+  </div>
+  <div class="product-visual">
+    <img src="trasera.png" alt="Camiseta Heavyweight — espalda" class="js-back">
+  </div>
+</section>
+
+<section class="band" id="material">
   <h3>El peso no es marketing. Es la razón por la que dura diez años de rutina.</h3>
   <div class="band-list">
     <div><span>Origen del algodón</span><span>Fibra larga, crudo</span></div>
@@ -346,7 +394,7 @@
 </section>
 
 <footer>
-  <h4>LEVANTA<br>Y SUDA.</h4>
+  <h4>Levanta<br>y <em>suda.</em></h4>
   <a href="#coleccion" class="cta-btn">Ver colección completa</a>
   <div class="foot-meta">
     <span>HEAVYWEIGHT™ — SERIE GIMNASIO</span>
@@ -359,91 +407,93 @@
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isTouch = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
 
-  if(!reduceMotion){
+  /* ---------- Entrada del hero ---------- */
+  gsap.from('.hero-title', { y:80, opacity:0, duration:1.2, ease:'power4.out' });
+  gsap.from('.js-zoom', { scale:0.6, y:80, opacity:0, duration:1.2, ease:'power4.out', delay:0.15 });
 
-    gsap.from('.hero h1', {y:60, opacity:0, duration:1, ease:'power3.out', delay:0.1});
-    gsap.from('.hero-tag, .hero-foot', {y:20, opacity:0, duration:0.8, ease:'power3.out', delay:0.4, stagger:0.1});
-
-    const panel = document.querySelector('.panel');
-    const garment = document.querySelector('.js-tilt');
-
-    /* --- Parallax principal: la camiseta crece y se acerca (efecto cámara) --- */
-    gsap.fromTo(garment,
-      {
-        scale: 0.65,
-        y: 140,
-        rotateX: 4,
-        opacity: 0.4
-      },
-      {
-        scale: 1.5,
-        y: -100,
-        rotateX: 0,
-        opacity: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: panel,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.2
-        }
+  /* ---------- Efecto cámara: la camiseta crece y se acerca al hacer scroll ---------- */
+  gsap.fromTo('.js-zoom',
+    { scale:0.7, y:60 },
+    {
+      scale:1.6,
+      y:-140,
+      ease:'none',
+      scrollTrigger:{
+        trigger:'.hero',
+        start:'top top',
+        end:'bottom top',
+        scrub:true
       }
-    );
+    }
+  );
 
-    /* --- Texto en dirección contraria (profundidad) --- */
-    gsap.fromTo('.panel-info',
-      { y: 60, opacity: 1 },
-      {
-        y: -100,
-        opacity: 0.2,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: panel,
-          start: 'top 70%',
-          end: 'center 30%',
-          scrub: 1
-        }
-      }
-    );
+  /* Texto gigante de fondo: parallax en sentido contrario */
+  gsap.to('.js-bg', {
+    yPercent:40,
+    opacity:0,
+    ease:'none',
+    scrollTrigger:{
+      trigger:'.hero',
+      start:'top top',
+      end:'bottom top',
+      scrub:true
+    }
+  });
 
-    gsap.from('.band h3', {
-      y: 40, opacity: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: '.band', start: 'top 75%' }
-    });
+  /* ---------- Impacto ---------- */
+  gsap.from('.impact h2', {
+    y:60, opacity:0, duration:1, ease:'power4.out',
+    scrollTrigger:{ trigger:'.impact', start:'top 75%' }
+  });
 
-    gsap.from('footer h4', {
-      scale: 0.9, opacity: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: 'footer', start: 'top 80%' }
-    });
+  /* ---------- Producto ---------- */
+  gsap.from('.js-info', {
+    x:-60, opacity:0, duration:1, ease:'power3.out',
+    scrollTrigger:{ trigger:'.product', start:'top 70%' }
+  });
+  gsap.from('.js-back', {
+    x:60, opacity:0, duration:1, ease:'power3.out',
+    scrollTrigger:{ trigger:'.product', start:'top 70%' }
+  });
 
-    /* --- Mouse tilt 3D (desktop) --- */
-    if(!isTouch){
-      document.querySelectorAll('.js-tilt').forEach((tiltEl) => {
-        const yTo = gsap.quickTo(tiltEl, "rotationY", {duration: 0.6, ease: "power3"});
+  /* ---------- Material ---------- */
+  gsap.from('.band h3', {
+    y:40, opacity:0, duration:1, ease:'power3.out',
+    scrollTrigger:{ trigger:'.band', start:'top 75%' }
+  });
 
-        tiltEl.addEventListener("mousemove", (e) => {
-          const rect = tiltEl.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width  - 0.5;
-          yTo(x * 24);
-        });
+  /* ---------- Footer ---------- */
+  gsap.from('footer h4', {
+    scale:0.85, opacity:0, duration:1, ease:'power4.out',
+    scrollTrigger:{ trigger:'footer', start:'top 80%' }
+  });
 
-        tiltEl.addEventListener("mouseleave", () => yTo(0));
+  /* ---------- Mouse tilt 3D (desktop) ---------- */
+  if(!isTouch){
+    document.querySelectorAll('.js-tilt').forEach((stage) => {
+      const xTo = gsap.quickTo(stage, "rotationY", {duration:0.5, ease:"power3"});
+      const yTo = gsap.quickTo(stage, "rotationX", {duration:0.5, ease:"power3"});
+
+      stage.addEventListener("mousemove", (e) => {
+        const r = stage.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        xTo(x * 22);
+        yTo(-y * 14);
       });
-    }
 
-    /* --- Tilt por giroscopio (mobile) --- */
-    if(isTouch && window.DeviceOrientationEvent){
-      window.addEventListener('deviceorientation', (e) => {
-        const ry = Math.max(-1, Math.min(1, (e.gamma || 0) / 30));
-        document.querySelectorAll('.js-tilt').forEach((tiltEl) => {
-          gsap.to(tiltEl, { rotationY: ry * 18, duration: 0.4, ease:'power2.out' });
-        });
-      }, true);
-    }
+      stage.addEventListener("mouseleave", () => { xTo(0); yTo(0); });
+    });
   }
+
+  /* ---------- Flip frontal / trasera al hacer clic ---------- */
+  document.querySelectorAll('.js-flip').forEach((flip) => {
+    flip.addEventListener('click', () => {
+      flip.classList.toggle('is-flipped');
+    });
+  });
 </script>
 
 </body>
