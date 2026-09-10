@@ -118,14 +118,14 @@
 
   /* ---------- PRODUCT PANEL ---------- */
   .panel{
-    min-height:100vh;
+    min-height:120vh;
     display:grid;
     grid-template-columns:1fr 1fr;
     align-items:center;
     gap:40px;
     padding:0 48px;
     position:relative;
-    overflow:hidden;
+    overflow:visible;
   }
   .panel-info{position:relative; z-index:2;}
   .panel-index{
@@ -171,6 +171,8 @@
     gap:24px;
     height:100%;
     perspective:1400px;
+    position:relative;
+    z-index:1;
   }
   .tilt{
     width:78%;
@@ -203,18 +205,6 @@
     pointer-events:none;
   }
   .face-back{transform:rotateY(180deg);}
-
-  .view-label{
-    font-family:'Space Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.15em;
-    color:var(--concrete);
-    text-transform:uppercase;
-  }
-  .view-label em{
-    font-style:normal;
-    color:var(--oxide);
-  }
 
   .panel:nth-child(odd) .panel-info{order:1;}
   .panel:nth-child(odd) .garment-wrap{order:2;}
@@ -339,7 +329,6 @@
           <div class="face face-back"><img src="back.jpg" alt="Espalda — Camiseta Iron Core"></div>
         </div>
       </div>
-      <div class="view-label">Vista <em>frontal</em></div>
     </div>
   </div>
 
@@ -379,42 +368,45 @@
     gsap.from('.hero-tag, .hero-foot', {y:20, opacity:0, duration:0.8, ease:'power3.out', delay:0.4, stagger:0.1});
 
     const panel = document.querySelector('.panel');
-    const flip = document.querySelector('.js-flip');
-    const faces = document.querySelectorAll('.face');
-    const label = document.querySelector('.view-label em');
+    const garment = document.querySelector('.js-tilt');
 
-    /* --- Flip 3D + expansión + parallax + brillo, ligados al scroll --- */
-    const panelTrigger = {
-      trigger: panel,
-      start: 'top 80%',
-      end: 'bottom 20%',
-      scrub: 1
-    };
-
-    gsap.fromTo(flip,
-      { scale: 0.55, y: 80, opacity: 0.3, rotateY: 0 },
+    /* --- Parallax principal: la camiseta crece y se acerca (efecto cámara) --- */
+    gsap.fromTo(garment,
       {
-        scale: 1.25,
-        y: -40,
+        scale: 0.65,
+        y: 140,
+        rotateX: 4,
+        opacity: 0.4
+      },
+      {
+        scale: 1.5,
+        y: -100,
+        rotateX: 0,
         opacity: 1,
-        rotateY: 180,
         ease: 'none',
-        scrollTrigger: panelTrigger,
-        onUpdate: function(){
-          label.textContent = this.progress() < 0.5 ? 'frontal' : 'trasera';
+        scrollTrigger: {
+          trigger: panel,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.2
         }
       }
     );
 
-    gsap.fromTo(faces,
-      { filter: 'brightness(0.45)' },
-      { filter: 'brightness(1)', ease: 'none', scrollTrigger: panelTrigger }
-    );
-
-    /* --- Parallax del panel-info (sentido contrario) --- */
+    /* --- Texto en dirección contraria (profundidad) --- */
     gsap.fromTo('.panel-info',
-      { y: 60, opacity: 0.4 },
-      { y: -40, opacity: 1, ease: 'none', scrollTrigger: panelTrigger }
+      { y: 60, opacity: 1 },
+      {
+        y: -100,
+        opacity: 0.2,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: panel,
+          start: 'top 70%',
+          end: 'center 30%',
+          scrub: 1
+        }
+      }
     );
 
     gsap.from('.band h3', {
@@ -430,21 +422,15 @@
     /* --- Mouse tilt 3D (desktop) --- */
     if(!isTouch){
       document.querySelectorAll('.js-tilt').forEach((tiltEl) => {
-        const xTo = gsap.quickTo(tiltEl, "rotationY", {duration: 0.6, ease: "power3"});
-        const yTo = gsap.quickTo(tiltEl, "rotationX", {duration: 0.6, ease: "power3"});
+        const yTo = gsap.quickTo(tiltEl, "rotationY", {duration: 0.6, ease: "power3"});
 
         tiltEl.addEventListener("mousemove", (e) => {
           const rect = tiltEl.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width  - 0.5;
-          const y = (e.clientY - rect.top)  / rect.height - 0.5;
-          xTo(x * 24);
-          yTo(-y * 16);
+          yTo(x * 24);
         });
 
-        tiltEl.addEventListener("mouseleave", () => {
-          xTo(0);
-          yTo(0);
-        });
+        tiltEl.addEventListener("mouseleave", () => yTo(0));
       });
     }
 
@@ -452,9 +438,8 @@
     if(isTouch && window.DeviceOrientationEvent){
       window.addEventListener('deviceorientation', (e) => {
         const ry = Math.max(-1, Math.min(1, (e.gamma || 0) / 30));
-        const rx = Math.max(-1, Math.min(1, (e.beta  || 0) / 30));
         document.querySelectorAll('.js-tilt').forEach((tiltEl) => {
-          gsap.to(tiltEl, { rotationY: ry * 18, rotationX: -rx * 12, duration: 0.4, ease:'power2.out' });
+          gsap.to(tiltEl, { rotationY: ry * 18, duration: 0.4, ease:'power2.out' });
         });
       }, true);
     }
