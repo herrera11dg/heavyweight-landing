@@ -3,451 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HEAVYWEIGHT — Camisetas de peso pesado</title>
+<title>HeavyWeight — Camisetas de peso pesado</title>
+
+<!-- SEO -->
+<meta name="description" content="Camisetas de algodón pesado (240–320 gsm) para entrenar. Corte boxy, caída firme y gramaje alto que aguanta años de rutina. Envíos a todo el país.">
+<link rel="canonical" href="https://TU-DOMINIO.com/">
+<meta name="theme-color" content="#14110d">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HeavyWeight">
+<meta property="og:title" content="HeavyWeight — Camisetas de peso pesado">
+<meta property="og:description" content="Camisetas de algodón pesado hechas para durar. 240–320 gsm, corte boxy, caída firme.">
+<meta property="og:url" content="https://TU-DOMINIO.com/">
+<meta property="og:image" content="https://TU-DOMINIO.com/assets/img/frontal.png">
+<meta property="og:locale" content="es_CO">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HeavyWeight — Camisetas de peso pesado">
+<meta name="twitter:description" content="Camisetas de algodón pesado hechas para durar. 240–320 gsm, corte boxy, caída firme.">
+<meta name="twitter:image" content="https://TU-DOMINIO.com/assets/img/frontal.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="assets/img/frontal.png">
+
+<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#16130e;
-    --ink-2:#211c15;
-    --bone:#ece5d6;
-    --sand:#cfc5b0;
-    --stone:#94886f;
-    --copper:#b96a3b;
-    --olive:#72735a;
-  }
 
-  *{margin:0;padding:0;box-sizing:border-box;}
-
-  html{scroll-behavior:auto;}
-
-  body{
-    background:var(--ink);
-    color:var(--bone);
-    font-family:'Inter',sans-serif;
-    overflow-x:hidden;
-  }
-
-  /* Ruido local (SVG, sin dependencia externa) */
-  body::after{
-    content:"";
-    position:fixed; top:0; left:0; width:100vw; height:100vh;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity:0.05;
-    pointer-events:none;
-    z-index:999;
-  }
-
-  ::selection{background:var(--copper); color:var(--ink);}
-  a{color:inherit; text-decoration:none;}
-
-  /* ---------- NAV ---------- */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:26px 48px;
-    mix-blend-mode:difference;
-  }
-  .nav-mark{font-family:'Anton',sans-serif; font-size:22px; letter-spacing:0.01em;}
-  .nav-links{display:flex; gap:32px; font-size:13px; font-weight:600;}
-  .nav-right{display:flex; align-items:center; gap:24px; font-size:13px;}
-  .nav-right .cart{font-family:'Space Mono',monospace; opacity:0.8;}
-  .cart-count{
-    display:inline-flex; align-items:center; justify-content:center;
-    width:20px; height:20px; border-radius:50%;
-    background:var(--copper); color:var(--ink);
-    font-family:'Space Mono',monospace; font-size:11px; font-weight:700;
-  }
-
-  /* ---------- HERO ---------- */
-  .hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero-label{
-    position:relative; z-index:2;
-    font-family:'Space Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--stone);
-    margin-bottom:20px;
-  }
-  .hero-title{
-    position:relative; z-index:2;
-    font-family:'Archivo Black',sans-serif;
-    font-size:clamp(40px,7vw,96px);
-    line-height:0.95;
-    text-align:center;
-    letter-spacing:-0.02em;
-  }
-  .hero-title span{color:var(--copper);}
-  .hero-sub{
-    position:relative; z-index:2;
-    margin-top:22px;
-    max-width:440px;
-    text-align:center;
-    font-size:15px;
-    line-height:1.6;
-    color:var(--stone);
-  }
-
-  /* --- Estructura 3D de la camiseta --- */
-  .shirt-stage{
-    position:relative;
-    z-index:3;
-    perspective:1400px;
-    transform-style:preserve-3d;
-    cursor:grab;
-    height:62vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-top:-2vh;
-  }
-  .shirt-zoom{
-    transform-style:preserve-3d;
-    will-change:transform;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .shirt-flip{
-    position:relative;
-    transform-style:preserve-3d;
-    transition:transform 0.9s cubic-bezier(0.65,0,0.35,1);
-    will-change:transform;
-  }
-  .shirt-flip.is-flipped{transform:rotateY(180deg);}
-
-  .shirt-face{
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
-    height:62vh;
-    width:auto;
-    display:block;
-    filter:drop-shadow(0 30px 45px rgba(0,0,0,0.7));
-    pointer-events:none;
-  }
-  .shirt-face.back{
-    position:absolute;
-    top:0; left:50%;
-    transform:translateX(-50%) rotateY(180deg);
-  }
-
-  .flip-hint{
-    position:absolute;
-    z-index:4;
-    bottom:13vh;
-    left:50%;
-    transform:translateX(-50%);
-    font-family:'Space Mono',monospace;
-    font-size:11px;
-    letter-spacing:0.12em;
-    color:var(--stone);
-    text-transform:uppercase;
-    pointer-events:none;
-  }
-
-  .scroll-hint{
-    position:absolute; bottom:36px; left:50%;
-    transform:translateX(-50%);
-    z-index:4;
-    font-family:'Space Mono',monospace;
-    font-size:11px;
-    color:var(--stone);
-    display:flex; align-items:center; gap:10px;
-  }
-  .scroll-hint::after{
-    content:'';
-    width:1px; height:32px;
-    background:var(--stone);
-    animation:scrollpulse 1.8s ease-in-out infinite;
-  }
-  @keyframes scrollpulse{
-    0%,100%{transform:scaleY(1); opacity:0.4;}
-    50%{transform:scaleY(0.4); opacity:1;}
-  }
-
-  /* ---------- TIENDA ---------- */
-  .shop{
-    padding:120px 48px;
-    max-width:1400px;
-    margin:0 auto;
-  }
-  .shop-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    border-bottom:1px solid rgba(236,229,214,0.12);
-    padding-bottom:24px;
-    margin-bottom:64px;
-  }
-  .shop-head h2{
-    font-family:'Archivo Black',sans-serif;
-    font-size:clamp(28px,4vw,48px);
-    letter-spacing:-0.01em;
-  }
-  .shop-head span{
-    font-family:'Space Mono',monospace;
-    font-size:12px;
-    color:var(--stone);
-  }
-
-  /* Producto destacado */
-  .featured{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:64px;
-    align-items:center;
-    margin-bottom:96px;
-  }
-  .featured-visual{
-    perspective:1400px;
-    cursor:grab;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:520px;
-    background:var(--ink-2);
-    border-radius:8px;
-    position:relative;
-    overflow:hidden;
-  }
-  .featured-visual .flip{
-    position:relative;
-    transform-style:preserve-3d;
-    transition:transform 0.9s cubic-bezier(0.65,0,0.35,1);
-  }
-  .featured-visual .flip.is-flipped{transform:rotateY(180deg);}
-  .featured-visual .face{
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
-  }
-  .featured-visual .face img{
-    height:56vh;
-    width:auto;
-    display:block;
-    filter:drop-shadow(0 30px 45px rgba(0,0,0,0.7));
-  }
-  .featured-visual .face.back{
-    position:absolute;
-    top:50%; left:50%;
-    transform:translate(-50%,-50%) rotateY(180deg);
-  }
-  .featured-visual .view-tag{
-    position:absolute;
-    top:20px; right:24px;
-    font-family:'Space Mono',monospace;
-    font-size:11px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--stone);
-  }
-
-  .featured-info .cat{
-    font-family:'Space Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--olive);
-    margin-bottom:14px;
-  }
-  .featured-info h3{
-    font-family:'Archivo Black',sans-serif;
-    font-size:clamp(36px,5vw,60px);
-    line-height:1;
-    margin-bottom:10px;
-  }
-  .featured-info .price{
-    font-family:'Space Mono',monospace;
-    font-size:22px;
-    color:var(--sand);
-    margin-bottom:24px;
-  }
-  .featured-info .desc{
-    color:var(--stone);
-    font-size:15px;
-    line-height:1.6;
-    max-width:380px;
-    margin-bottom:32px;
-  }
-
-  .size-label{
-    font-family:'Space Mono',monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--stone);
-    margin-bottom:12px;
-  }
-  .sizes{display:flex; gap:10px; margin-bottom:36px;}
-  .size{
-    width:48px; height:48px;
-    display:flex; align-items:center; justify-content:center;
-    border:1px solid rgba(236,229,214,0.25);
-    border-radius:4px;
-    font-family:'Space Mono',monospace;
-    font-size:13px;
-    cursor:pointer;
-    transition:all 0.2s ease;
-    background:transparent;
-    color:var(--bone);
-  }
-  .size:hover{border-color:var(--bone);}
-  .size.active{
-    background:var(--bone);
-    color:var(--ink);
-    border-color:var(--bone);
-  }
-
-  .buy-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:12px;
-    background:var(--bone);
-    color:var(--ink);
-    font-weight:700;
-    font-size:15px;
-    padding:18px 40px;
-    border-radius:4px;
-    border:none;
-    cursor:pointer;
-    letter-spacing:0.02em;
-    transition:transform 0.2s ease, background 0.2s ease;
-  }
-  .buy-btn:hover{transform:translateY(-2px);}
-  .buy-btn.added{background:var(--copper); color:var(--ink);}
-
-  /* Grid de productos */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:40px;
-  }
-  .card{
-    cursor:pointer;
-  }
-  .card-visual{
-    perspective:1200px;
-    cursor:grab;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:420px;
-    background:var(--ink-2);
-    border-radius:8px;
-    overflow:hidden;
-    margin-bottom:20px;
-    transition:background 0.3s ease;
-  }
-  .card-visual img{
-    height:44vh;
-    width:auto;
-    display:block;
-    filter:drop-shadow(0 24px 36px rgba(0,0,0,0.6));
-  }
-  .card-name{
-    font-family:'Archivo Black',sans-serif;
-    font-size:20px;
-    margin-bottom:6px;
-  }
-  .card-meta{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-family:'Space Mono',monospace;
-    font-size:14px;
-    color:var(--sand);
-  }
-  .card-meta .add{
-    font-size:12px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--stone);
-    transition:color 0.2s ease;
-  }
-  .card:hover .add{color:var(--copper);}
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    padding:100px 48px 48px;
-    border-top:1px solid rgba(236,229,214,0.1);
-  }
-  .footer-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:40px;
-    flex-wrap:wrap;
-    margin-bottom:72px;
-  }
-  .footer-brand{font-family:'Anton',sans-serif; font-size:44px; letter-spacing:0.01em;}
-  .footer-brand em{font-style:normal; color:var(--copper);}
-  .footer-links{display:flex; gap:48px; flex-wrap:wrap;}
-  .footer-col h5{
-    font-family:'Space Mono',monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--stone);
-    margin-bottom:16px;
-  }
-  .footer-col a{
-    display:block;
-    font-size:14px;
-    color:var(--sand);
-    margin-bottom:10px;
-    transition:color 0.2s ease;
-  }
-  .footer-col a:hover{color:var(--copper);}
-  .footer-bottom{
-    display:flex;
-    justify-content:space-between;
-    font-family:'Space Mono',monospace;
-    font-size:12px;
-    color:var(--stone);
-    border-top:1px solid rgba(236,229,214,0.1);
-    padding-top:24px;
-  }
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:860px){
-    nav{padding:20px 24px;}
-    .nav-links{display:none;}
-    .hero-title{font-size:clamp(34px,9vw,56px);}
-    .shirt-stage{height:50vh;}
-    .shirt-face{height:50vh;}
-    .shop{padding:80px 24px;}
-    .featured{grid-template-columns:1fr; gap:32px;}
-    .featured-visual{order:1; min-height:400px;}
-    .featured-info{order:2;}
-    .grid{grid-template-columns:1fr; gap:32px;}
-    footer{padding:80px 24px 40px;}
-    .footer-bottom{flex-direction:column; gap:8px;}
-  }
-</style>
+<link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
+<a href="#contenido" class="skip-link">Saltar al contenido</a>
+
 <nav>
-  <div class="nav-mark">HEAVYWEIGHT</div>
+  <div class="nav-mark">HeavyWeight</div>
   <div class="nav-links">
     <a href="#tienda">Tienda</a>
-    <a href="#envios">Envíos</a>
+    <a href="envios.html">Envíos</a>
     <a href="#contacto">Contacto</a>
   </div>
   <div class="nav-right">
-    <span class="cart">Carrito</span>
-    <span class="cart-count">0</span>
+    <button class="cart-btn" id="open-cart" aria-label="Abrir carrito de compras">
+      Carrito <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
+    </button>
   </div>
 </nav>
+
+<main id="contenido">
 
 <section class="hero">
   <div class="hero-label">Algodón pesado · serie gimnasio</div>
@@ -457,8 +64,18 @@
   <div class="shirt-stage js-tilt">
     <div class="shirt-zoom js-zoom">
       <div class="shirt-flip js-flip">
-        <img class="shirt-face front" src="frontal.png" alt="Camiseta Heavyweight — frontal">
-        <img class="shirt-face back" src="trasera.png" alt="Camiseta Heavyweight — trasera">
+        <div class="shirt-face front">
+          <picture>
+            <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
+            <img src="assets/img/frontal.png" alt="Camiseta HeavyWeight Iron Core vista frontal" width="377" height="502" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="shirt-face back">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
+            <img src="assets/img/trasera.png" alt="Camiseta HeavyWeight Iron Core vista trasera" width="377" height="502" loading="lazy">
+          </picture>
+        </div>
       </div>
     </div>
   </div>
@@ -476,175 +93,189 @@
   <div class="featured">
     <div class="featured-visual js-tilt">
       <div class="flip js-flip">
-        <div class="face front"><img src="frontal.png" alt="Iron Core — frontal"></div>
-        <div class="face back"><img src="trasera.png" alt="Iron Core — trasera"></div>
+        <div class="face front">
+          <picture>
+            <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
+            <img src="assets/img/frontal.png" alt="Camiseta Iron Core vista frontal" width="377" height="502" loading="lazy">
+          </picture>
+        </div>
+        <div class="face back">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
+            <img src="assets/img/trasera.png" alt="Camiseta Iron Core vista trasera" width="377" height="502" loading="lazy">
+          </picture>
+        </div>
       </div>
       <span class="view-tag">Clic para girar</span>
     </div>
+
     <div class="featured-info">
       <div class="cat">Best seller</div>
       <h3>Iron Core</h3>
       <div class="price">$89.000</div>
+      <div class="stock-badge" id="stock-badge">Selecciona una talla</div>
       <p class="desc">Nuestro corte boxy de referencia. Algodón crudo de 280&nbsp;gsm, caída firme que no se deforma.</p>
-      <div class="size-label">Talla</div>
-      <div class="sizes">
-        <button class="size">S</button>
-        <button class="size active">M</button>
-        <button class="size">L</button>
-        <button class="size">XL</button>
+
+      <span class="opt-label" id="color-label">Color</span>
+      <div class="colors" id="featured-colors" role="radiogroup" aria-labelledby="color-label"></div>
+
+      <span class="opt-label" id="size-label">Talla</span>
+      <div class="sizes" id="featured-sizes" role="radiogroup" aria-labelledby="size-label"></div>
+
+      <div class="buy-row">
+        <button class="buy-btn" id="featured-buy">Agregar al carrito</button>
+        <button class="size-guide-link" id="size-guide-link">Guía de tallas</button>
       </div>
-      <button class="buy-btn js-buy">Agregar al carrito</button>
     </div>
   </div>
 
   <div class="grid">
     <div class="card">
       <div class="card-visual js-tilt">
-        <img src="trasera.png" alt="Atlas — trasera">
+        <picture>
+          <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
+          <img src="assets/img/trasera.png" alt="Camiseta Atlas vista trasera" width="377" height="502" loading="lazy">
+        </picture>
       </div>
       <div class="card-name">Atlas</div>
-      <div class="card-meta"><span>$95.000</span><span class="add">Agregar</span></div>
+      <div class="card-meta">
+        <span>$95.000</span>
+        <button class="add" data-product="atlas" aria-label="Agregar Atlas al carrito">Agregar</button>
+      </div>
     </div>
     <div class="card">
       <div class="card-visual js-tilt">
-        <img src="frontal.png" alt="Grind — frontal">
+        <picture>
+          <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
+          <img src="assets/img/frontal.png" alt="Camiseta Grind vista frontal" width="377" height="502" loading="lazy">
+        </picture>
       </div>
       <div class="card-name">Grind</div>
-      <div class="card-meta"><span>$79.000</span><span class="add">Agregar</span></div>
+      <div class="card-meta">
+        <span>$79.000</span>
+        <button class="add" data-product="grind" aria-label="Agregar Grind al carrito">Agregar</button>
+      </div>
     </div>
   </div>
 </section>
 
+</main>
+
 <footer id="contacto">
   <div class="footer-top">
-    <div class="footer-brand">HEAVY<em>WEIGHT</em></div>
+    <div class="footer-brand">Heavy<em>Weight</em></div>
     <div class="footer-links">
       <div class="footer-col">
-        <h5 id="envios">Tienda</h5>
+        <h5>Tienda</h5>
         <a href="#tienda">Colección</a>
-        <a href="#tienda">Iron Core</a>
+        <button class="size-guide-link" data-open-modal="size-guide-modal" style="display:block;">Guía de tallas</button>
         <a href="#tienda">Novedades</a>
       </div>
       <div class="footer-col">
         <h5>Ayuda</h5>
-        <a href="#">Envíos</a>
-        <a href="#">Cambios</a>
-        <a href="#">Tallas</a>
+        <a href="envios.html">Envíos y devoluciones</a>
+        <a href="terminos.html">Términos y condiciones</a>
+        <a href="privacidad.html">Política de privacidad</a>
       </div>
       <div class="footer-col">
         <h5>Contacto</h5>
-        <a href="#">Instagram</a>
-        <a href="#">Correo</a>
+        <a href="https://instagram.com/TU-CUENTA" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:hola@TU-DOMINIO.com">Correo</a>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>HEAVYWEIGHT™ — 2026</span>
+    <span>© 2026 HeavyWeight™ — Todos los derechos reservados</span>
     <span>Algodón pesado · Envíos a todo el país</span>
   </div>
 </footer>
 
+<!-- Drawer del carrito -->
+<div class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+  <div class="cart-head">
+    <h3 id="cart-title">Tu carrito</h3>
+    <button class="close" id="close-cart" aria-label="Cerrar carrito">×</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cart-total">$0</span>
+    </div>
+    <button class="checkout-btn" id="checkout-btn">Finalizar compra</button>
+  </div>
+</div>
+
+<!-- Guía de tallas -->
+<div class="modal-backdrop" id="size-guide-modal" role="dialog" aria-modal="true" aria-labelledby="size-guide-title">
+  <div class="modal">
+    <button class="close" data-close aria-label="Cerrar">×</button>
+    <h3 id="size-guide-title">Guía de tallas</h3>
+    <p style="color:var(--sand); margin-bottom:8px;">Medidas en centímetros. Corte boxy: recomendamos tu talla habitual.</p>
+    <table class="size-table">
+      <thead>
+        <tr><th>Talla</th><th>Pecho</th><th>Largo</th><th>Hombro</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>S</td><td>104</td><td>68</td><td>47</td></tr>
+        <tr><td>M</td><td>110</td><td>71</td><td>49</td></tr>
+        <tr><td>L</td><td>116</td><td>74</td><td>51</td></tr>
+        <tr><td>XL</td><td>122</td><td>77</td><td>53</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Checkout -->
+<div class="modal-backdrop" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+  <div class="modal">
+    <button class="close" data-close aria-label="Cerrar">×</button>
+    <h3 id="checkout-title">Finalizar compra</h3>
+    <form id="checkout-form">
+      <div class="form-group">
+        <label for="f-name">Nombre completo</label>
+        <input type="text" id="f-name" name="name" autocomplete="name" required>
+      </div>
+      <div class="form-group">
+        <label for="f-email">Correo</label>
+        <input type="email" id="f-email" name="email" autocomplete="email" required>
+      </div>
+      <div class="form-group">
+        <label for="f-phone">Teléfono</label>
+        <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label for="f-address">Dirección de envío</label>
+        <input type="text" id="f-address" name="address" autocomplete="street-address" required>
+      </div>
+      <p id="checkout-error" style="display:none; color:var(--copper); font-size:13px; margin-bottom:12px;">Completa nombre, correo y dirección.</p>
+      <button type="submit" class="checkout-btn">Confirmar pedido</button>
+    </form>
+  </div>
+</div>
+
+<!-- Confirmación -->
+<div class="modal-backdrop" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="order-title">
+  <div class="modal" style="text-align:center;">
+    <button class="close" data-close aria-label="Cerrar">×</button>
+    <h3 id="order-title">¡Gracias por tu compra!</h3>
+    <p style="color:var(--sand); margin-bottom:8px;">Tu pedido fue registrado con el número</p>
+    <p style="font-family:'Space Mono',monospace; font-size:24px; color:var(--copper); margin-bottom:16px;" id="order-number">—</p>
+    <p style="color:var(--stone); font-size:14px;">Te contactaremos para coordinar el pago y el envío.</p>
+  </div>
+</div>
+
+<!-- Banner de cookies -->
+<div class="cookie-banner" id="cookie-banner" role="region" aria-label="Aviso de cookies">
+  <p>Usamos cookies para mejorar tu experiencia y, con tu consentimiento, para analítica (Google Analytics / Meta Pixel). Consulta nuestra <a href="privacidad.html" style="color:var(--copper);">política de privacidad</a>.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-ghost" id="cookies-reject">Solo esenciales</button>
+    <button class="btn btn-primary" id="cookies-accept">Aceptar</button>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-  gsap.registerPlugin(ScrollTrigger);
-
-  const isTouch = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
-
-  /* ---------- Entrada del hero ---------- */
-  gsap.from('.hero-label, .hero-title, .hero-sub', { y:40, opacity:0, duration:1, ease:'power4.out', stagger:0.08 });
-  gsap.from('.js-zoom', { scale:0.6, y:80, opacity:0, duration:1.2, ease:'power4.out', delay:0.2 });
-
-  /* ---------- Efecto cámara: la camiseta crece al hacer scroll ---------- */
-  gsap.fromTo('.js-zoom',
-    { scale:0.7, y:60 },
-    {
-      scale:1.6,
-      y:-140,
-      ease:'none',
-      scrollTrigger:{
-        trigger:'.hero',
-        start:'top top',
-        end:'bottom top',
-        scrub:true
-      }
-    }
-  );
-
-  /* ---------- Tienda ---------- */
-  gsap.from('.shop-head', {
-    y:40, opacity:0, duration:1, ease:'power3.out',
-    scrollTrigger:{ trigger:'.shop', start:'top 75%' }
-  });
-  gsap.from('.featured-info', {
-    x:-60, opacity:0, duration:1, ease:'power3.out',
-    scrollTrigger:{ trigger:'.featured', start:'top 70%' }
-  });
-  gsap.from('.featured-visual', {
-    x:60, opacity:0, duration:1, ease:'power3.out',
-    scrollTrigger:{ trigger:'.featured', start:'top 70%' }
-  });
-  gsap.from('.card', {
-    y:60, opacity:0, duration:0.9, ease:'power3.out', stagger:0.15,
-    scrollTrigger:{ trigger:'.grid', start:'top 75%' }
-  });
-
-  /* ---------- Tilt 3D + parallax de profundidad (por elemento, respecto a su centro) ---------- */
-  function initTilt(stage){
-    if(isTouch) return;
-    const rotY = gsap.quickTo(stage, "rotationY", {duration:0.5, ease:"power3"});
-    const rotX = gsap.quickTo(stage, "rotationX", {duration:0.5, ease:"power3"});
-    const posX = gsap.quickTo(stage, "x", {duration:0.6, ease:"power3"});
-    const posY = gsap.quickTo(stage, "y", {duration:0.6, ease:"power3"});
-
-    stage.addEventListener("mousemove", (e) => {
-      const r = stage.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width  - 0.5;
-      const py = (e.clientY - r.top)  / r.height - 0.5;
-      rotY(px * 16);
-      rotX(-py * 12);
-      posX(px * 10);
-      posY(py * 6);
-    });
-
-    stage.addEventListener("mouseleave", () => {
-      rotY(0); rotX(0); posX(0); posY(0);
-    });
-  }
-  document.querySelectorAll('.js-tilt').forEach(initTilt);
-
-  /* ---------- Flip frontal / trasera al hacer clic ---------- */
-  document.querySelectorAll('.js-flip').forEach((flip) => {
-    flip.addEventListener('click', () => flip.classList.toggle('is-flipped'));
-  });
-
-  /* ---------- Selector de tallas ---------- */
-  document.querySelectorAll('.sizes .size').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      btn.parentElement.querySelectorAll('.size').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-
-  /* ---------- Botón comprar ---------- */
-  document.querySelectorAll('.js-buy').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      btn.classList.add('added');
-      const original = btn.textContent;
-      btn.textContent = 'Agregado';
-      setTimeout(() => { btn.classList.remove('added'); btn.textContent = original; }, 1400);
-    });
-  });
-
-  /* ---------- Refrescar triggers tras cargar las imágenes ---------- */
-  const refresh = () => ScrollTrigger.refresh();
-  window.addEventListener('load', refresh);
-  Promise.all(
-    Array.from(document.images)
-      .filter((img) => !img.complete)
-      .map((img) => new Promise((res) => { img.onload = img.onerror = res; }))
-  ).then(refresh);
-</script>
-
+<script src="assets/js/main.js"></script>
 </body>
 </html>
