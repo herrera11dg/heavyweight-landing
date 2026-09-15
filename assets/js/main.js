@@ -3,48 +3,53 @@
    GSAP (parallax, tilt) + e-commerce (carrito, tallas, checkout)
    ============================================================ */
 
-/* ---------- Catálogo (precios en euros) ---------- */
-const SHARED_COLORS = ['#0d0d0d', '#3c3c3c', '#1f3a2d', '#1c2b3a', '#8f8f8f', '#e8e6e1'];
-const SHARED_COLOR_NAMES = ['Black', 'Dark Grey', 'Forrest Green', 'Navy Blue', 'Heather Grey', 'Snow Grey'];
-
+/* ---------- Catálogo (fallback local; el stock real viene de /api/products) ---------- */
 const PRODUCTS = {
   'progress': {
     name: 'Progress', price: 35, gsm: 240,
     img: 'assets/img/progress-frente.webp',
-    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
     sizes: { S: 2, M: 3, L: 3, XL: 2 }
   },
   'again': {
     name: 'Again', price: 35, gsm: 240,
     img: 'assets/img/again-frente.webp',
-    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
     sizes: { S: 2, M: 2, L: 2, XL: 1 }
   },
   'focus': {
     name: 'Focus', price: 35, gsm: 240,
     img: 'assets/img/focus-frente.webp',
-    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
     sizes: { S: 2, M: 3, L: 2, XL: 1 }
   },
   'gojo': {
     name: 'Gojo', price: 35, gsm: 240,
     img: 'assets/img/gojo-frente.webp',
-    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
     sizes: { S: 1, M: 2, L: 2, XL: 1 }
   },
   'toji': {
     name: 'Toji', price: 35, gsm: 240,
     img: 'assets/img/toji-frente.webp',
-    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
     sizes: { S: 2, M: 2, L: 1, XL: 1 }
   },
   'one-more-rep': {
     name: 'One More Rep', price: 35, gsm: 240,
     img: 'assets/img/frontal.webp',
-    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
     sizes: { S: 2, M: 3, L: 2, XL: 2 }
   }
 };
+
+/* ---------- Sincronizar stock con el servidor ---------- */
+async function loadStock() {
+  try {
+    const res = await fetch('/api/products');
+    if (!res.ok) return;
+    const list = await res.json();
+    list.forEach((p) => {
+      if (PRODUCTS[p.id]) PRODUCTS[p.id].sizes = p.sizes;
+    });
+  } catch (e) {
+    // Sin servidor (desarrollo local): se usa el stock embebido.
+  }
+}
 
 /* ---------- Estado del carrito (localStorage) ---------- */
 const CART_KEY = 'heavyweight_cart';
@@ -64,10 +69,10 @@ function updateCartBadge() {
 }
 
 /* ---------- Añadir al carrito ---------- */
-function addToCart(productId, size, colorName, qty = 1) {
+function addToCart(productId, size, qty = 1) {
   const p = PRODUCTS[productId];
   const cart = getCart();
-  const key = productId + '|' + size + '|' + (colorName || '');
+  const key = productId + '|' + size;
   const existing = cart.find((i) => i.key === key);
   if (existing) existing.qty += qty;
   else {
@@ -77,7 +82,6 @@ function addToCart(productId, size, colorName, qty = 1) {
       name: p.name,
       price: p.price,
       size,
-      color: colorName || null,
       qty,
       img: p.img
     });
@@ -125,7 +129,7 @@ function renderCart() {
         <img src="${i.img}" alt="" width="64" height="80" loading="lazy">
         <div class="cart-item-info">
           <div class="cart-item-name">${i.name}</div>
-          <div class="cart-item-var">${i.size ? t('size_prefix') + ' ' + i.size : ''}${i.color ? ' / ' + i.color : ''}</div>
+          <div class="cart-item-var">${i.size ? t('size_prefix') + ' ' + i.size : ''}</div>
           <div class="cart-item-price">${formatPrice(i.price)}</div>
           <div class="cart-qty">
             <button data-dec="${i.key}" aria-label="${t('cart_dec')}">−</button>
@@ -145,23 +149,49 @@ const cartDrawer = document.getElementById('cart-drawer');
 function openCartDrawer() { cartDrawer.classList.add('open'); }
 function closeCartDrawer() { cartDrawer.classList.remove('open'); }
 
-/* ---------- Checkout (simulación de pedido) ---------- */
-function placeOrder(form) {
-  const order = {
+/* ---------- Checkout (Stripe Checkout real) ---------- */
+function validateCheckout(form) {
+  const email = form.email.value.trim();
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const phone = form.phone.value.trim();
+  const phoneOk = phone === '' || /^[+0-9()\-\s]{7,}$/.test(phone);
+
+  let firstInvalid = null;
+  const setInvalid = (field, invalid) => {
+    field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+    if (invalid && !firstInvalid) firstInvalid = field;
+  };
+
+  setInvalid(form.name, form.name.value.trim() === '');
+  setInvalid(form.email, !emailOk);
+  setInvalid(form.address, form.address.value.trim() === '');
+  setInvalid(form.phone, !phoneOk);
+  return firstInvalid;
+}
+
+async function checkoutWithStripe(form) {
+  const customer = {
     name: form.name.value.trim(),
     email: form.email.value.trim(),
     phone: form.phone.value.trim(),
-    address: form.address.value.trim(),
-    items: getCart()
+    address: form.address.value.trim()
   };
-  if (!order.name || !order.email || !order.address) return false;
+  const items = getCart().map((i) => ({ id: i.id, size: i.size, qty: i.qty }));
 
-  // Simulación: en producción conectarías aquí un procesador de pago
-  // (Stripe, MB WAY, etc.) y un backend para persistir el pedido.
-  const orderNumber = 'HW-' + Date.now().toString().slice(-6);
-  saveCart([]);
-  updateCartBadge();
-  return orderNumber;
+  const res = await fetch('/api/checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ items, customer })
+  });
+
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const err = document.getElementById('checkout-error');
+    err.textContent = data.error || t('co_error');
+    err.style.display = 'block';
+    return null;
+  }
+  return data.url;
 }
 
 /* ---------- Selector de talla/color (producto destacado) ---------- */
@@ -220,7 +250,7 @@ function initFeatured() {
 
   function addFeaturedToCart() {
     if (!selectedSize) { renderFeatured(); return; }
-    addToCart('progress', selectedSize, null);
+    addToCart('progress', selectedSize);
     buyBtn.classList.add('added');
     buyBtn.textContent = t('added');
     setTimeout(() => { buyBtn.classList.remove('added'); buyBtn.textContent = t('buy'); }, 1400);
@@ -247,17 +277,46 @@ function initGrid() {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const id = btn.dataset.product;
-      addToCart(id, 'M', null);
+      addToCart(id, 'M');
     });
   });
 }
 
-/* ---------- Modales genéricos ---------- */
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+/* ---------- Modales genéricos (con focus trap) ---------- */
+let lastFocused = null;
+
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  lastFocused = document.activeElement;
+  modal.classList.add('open');
+  const first = modal.querySelector('input, button, a[href], [tabindex]:not([tabindex="-1"])');
+  (first || modal).focus();
+}
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.remove('open');
+  if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+}
 function closeAllModals() {
+  const open = document.querySelector('.modal-backdrop.open');
   document.querySelectorAll('.modal-backdrop.open').forEach((m) => m.classList.remove('open'));
   closeCartDrawer();
+  if (open && lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+}
+
+const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])';
+function trapFocus(container) {
+  container.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const focusables = container.querySelectorAll(FOCUSABLE);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
 }
 
 /* ---------- Cookies ---------- */
@@ -335,14 +394,19 @@ function initFlips() {
 }
 
 /* ---------- Inicialización ---------- */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   updateCartBadge();
   renderCart();
   renderPrices();
+  await loadStock();
   initFeatured();
   initGrid();
   initCookies();
   initFlips();
+
+  // Focus trap en modales y drawer del carrito
+  document.querySelectorAll('.modal-backdrop').forEach(trapFocus);
+  trapFocus(document.getElementById('cart-drawer'));
 
   // Nav: fondo sólido al hacer scroll
   const header = document.getElementById('site-header');
@@ -387,19 +451,33 @@ document.addEventListener('DOMContentLoaded', () => {
     m.addEventListener('click', (e) => { if (e.target === m) closeAllModals(); })
   );
 
-  // Formulario de checkout
-  document.getElementById('checkout-form').addEventListener('submit', (e) => {
+  // Formulario de checkout (Stripe Checkout)
+  document.getElementById('checkout-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const orderNumber = placeOrder(e.target);
-    if (!orderNumber) {
-      document.getElementById('checkout-error').style.display = 'block';
+    const form = e.target;
+    const err = document.getElementById('checkout-error');
+    err.style.display = 'none';
+
+    const firstInvalid = validateCheckout(form);
+    if (firstInvalid) {
+      err.textContent = t('co_error');
+      err.style.display = 'block';
+      firstInvalid.focus();
       return;
     }
-    closeModal('checkout-modal');
-    renderCart();
-    openModal('order-modal');
-    document.getElementById('order-number').textContent = orderNumber;
-    e.target.reset();
+
+    const btn = document.getElementById('checkout-confirm');
+    btn.disabled = true;
+    btn.textContent = t('co_redirecting') || '…';
+
+    const url = await checkoutWithStripe(form);
+    if (!url) {
+      btn.disabled = false;
+      btn.textContent = t('co_confirm');
+      return;
+    }
+    // Redirigir a Stripe para el pago
+    window.location.href = url;
   });
 
   // Cerrar con tecla Escape

@@ -1,97 +1,98 @@
 # HeavyWeight™
 
-Landing + tienda de camisetas de algodón pesado (serie gimnasio). Construida con HTML, CSS y JavaScript vanilla + [GSAP](https://gsap.com) (ScrollTrigger) para el parallax y el tilt 3D.
+Landing + tienda de camisetas de algodón pesado (serie gimnasio). HTML + CSS + JavaScript vanilla, GSAP (ScrollTrigger) para parallax/tilt 3D y **Stripe Checkout** para cobrar de verdad (serverless en Vercel).
 
 ## Características
 
-- **Parallax + tilt 3D** con GSAP/ScrollTrigger (la camiseta crece al hacer scroll y se inclina con el mouse).
-- **Flip 3D** frontal/trasera de cada producto (clic o teclado).
-- **Tienda funcional**: selector de talla/color, control de stock, carrito persistente (`localStorage`) y checkout.
-- **Multilingüe**: portugués de Portugal (principal), inglés y español, con selector de idioma y detección del navegador.
-- **Precios en euros (€)** con formato localizado por idioma.
-- **Imágenes optimizadas**: WebP con fallback PNG, `srcset` 1x/2x y `lazy loading`.
-- **SEO**: meta description, Open Graph, Twitter Card, favicon SVG, canonical.
-- **Legal**: políticas de privacidad, términos y envíos/devoluciones (traducidas).
-- **Cookies**: banner de consentimiento (esenciales vs. analítica).
-- **Accesibilidad**: contraste AA, navegación por teclado, `aria-label`, foco visible, `skip-link`.
+- **Parallax + tilt 3D** con GSAP/ScrollTrigger.
+- **Flip 3D** frontal/trasera (espalda visible primero, clic para girar).
+- **Tienda**: 6 productos a €35, selector de talla con stock, carrito persistente (`localStorage`).
+- **Pago real**: Stripe Checkout vía `/api/checkout` + webhook de confirmación por email (Resend).
+- **Stock en servidor**: catálogo en `lib/products.js`, expuesto vía `GET /api/products`.
+- **Multilingüe**: pt-PT (principal), en, es — con `?lang=` en la URL y detección de navegador.
+- **Precios en euros (€)** localizados por idioma.
+- **Imágenes optimizadas**: WebP + fallback PNG, `srcset` 1x/2x, `lazy loading`.
+- **SEO**: meta, Open Graph, Twitter Card, canonical, `hreflang`, Schema.org (JSON-LD), `sitemap.xml`, `robots.txt`.
+- **Legal**: privacidad, términos y envíos/devoluciones (traducidas).
+- **Accesibilidad**: contraste AA, navegación por teclado, focus trap en modales, `aria-*`, `skip-link`, validación de formulario.
 
 ## Estructura
 
 ```
 heavyweight/
 ├── index.html            # Página principal (tienda)
+├── obrigado.html         # Página de agradecimiento (post-pago)
 ├── privacidade.html      # Política de privacidade
 ├── termos.html           # Termos e condições
 ├── envios.html           # Envios e devoluções
+├── robots.txt
+├── sitemap.xml
+├── package.json          # Dependencias (stripe, resend)
+├── api/                  # Serverless functions (Vercel)
+│   ├── products.js       # GET catálogo + stock
+│   ├── checkout.js       # POST crea sesión de Stripe
+│   └── webhook.js        # POST eventos de Stripe + email
+├── lib/
+│   └── products.js       # Catálogo y stock (fuente de verdad)
 ├── assets/
-│   ├── css/styles.css    # Estilos
-│   ├── js/i18n.js        # Traducciones (pt / en / es)
-│   ├── js/main.js        # Lógica (GSAP + carrito)
-│   └── img/              # Imágenes (WebP + PNG + favicon)
+│   ├── css/styles.css
+│   ├── js/i18n.js
+│   ├── js/main.js
+│   └── img/
 ├── README.md
-├── LICENSE
-└── .gitignore
+└── LICENSE
 ```
+
+## Backend y pagos (Stripe)
+
+1. Crea una cuenta en [Stripe](https://stripe.com).
+2. En Vercel (Settings → Environment Variables), define:
+   | Variable | Descripción |
+   |----------|-------------|
+   | `STRIPE_SECRET_KEY` | Clave secreta de Stripe (`sk_live_...`) |
+   | `STRIPE_WEBHOOK_SECRET` | Firma del webhook (`whsec_...`) |
+   | `RESEND_API_KEY` | Clave de [Resend](https://resend.com) para el email de confirmación |
+   | `EMAIL_FROM` | Remitente del email, p. ej. `HeavyWeight <pedidos@heavyweight.pt>` |
+   | `SITE_URL` | URL de producción, p. ej. `https://heavyweight-sigma.vercel.app` |
+3. En el dashboard de Stripe, añade un endpoint webhook apuntando a `https://TU-DOMINIO/api/webhook` con el evento `checkout.session.completed`, y copia el `whsec_...` a `STRIPE_WEBHOOK_SECRET`.
+
+**Nota sobre stock**: el catálogo y el stock viven en `lib/products.js` (servidor). Para descuento de stock en tiempo real entre múltiples usuarios, conecta una base de datos (Vercel KV / Supabase) en el webhook — el hook ya está preparado (`TODO(stock)` en `api/webhook.js`).
 
 ## Idiomas
 
-- **Idioma por defecto**: portugués de Portugal.
-- **Detección**: si el navegador está en `en` o `es`, se usa ese idioma automáticamente; si no, portugués.
-- **Persistencia**: la elección se guarda en `localStorage`.
-- Las traducciones están en `assets/js/i18n.js` (objeto `I18N` con claves `pt`, `en`, `es`).
+- **Por defecto**: portugués de Portugal.
+- **Detección**: `?lang=` → `localStorage` → idioma del navegador → pt.
+- Las traducciones están en `assets/js/i18n.js`.
 
 ## Ejecutar localmente
 
-Abre `index.html` directamente, o sirve la carpeta:
-
 ```bash
-npx serve .
+npm install
+vercel dev
+# o abre index.html directamente (el carrito funciona; /api no)
 ```
 
-## Despliegue
+## Despliegue (Vercel)
 
-### GitHub Pages (HTTPS gratuito)
+Ya conectado al repo de GitHub — cada `git push` a `master` redespliega automáticamente.
 
-1. Ve a tu repo → **Settings → Pages**.
-2. En *Source*, elige la rama `master` (o `main`) y la carpeta `/ (root)`.
-3. GitHub publicará en `https://<usuario>.github.io/<repo>/`.
-
-### Dominio propio + HTTPS
-
-1. Compra un dominio y, en tu proveedor DNS, crea un registro **CNAME** apuntando a `<usuario>.github.io`.
-2. En el repo, añade un archivo `CNAME` con tu dominio (sin `https://`):
-   ```
-   www.tudominio.com
-   ```
-3. En **Settings → Pages → Custom domain**, escribe tu dominio y activa **Enforce HTTPS**.
-
-## Pagos (Portugal)
-
-Para cobrar en Portugal, lo habitual es combinar:
-
-- **Stripe** → tarjetas + Apple Pay / Google Pay.
-- **MB WAY** y **Multibanco** (referência) → muy usados en Portugal (p. ej. vía [Ifthenpay](https://ifthenpay.com)).
-- **PayPal** → opcional.
-
-Además, necesitarás registrar la actividad (ENI o Unipessoal Lda), facturación certificada por la AT y liquidar el IVA (23% en Portugal continental). Consulta a un contabilista para los detalles fiscales.
+```
+https://heavyweight-sigma.vercel.app
+```
 
 ## Configuración pendiente (antes de producción)
 
-Reemplaza los siguientes marcadores:
-
 | Marcador | Dónde | Reemplazar por |
 |----------|-------|----------------|
-| `https://TU-DOMINIO.com` | `index.html` (OG/Twitter/canonical) | Tu dominio real |
-| `TU-DOMINIO.com` / `hola@TU-DOMINIO.com` | `i18n.js` (textos legales) | Tu dominio y correo |
 | `instagram.com/TU-CUENTA` | `index.html` (footer) | Tu cuenta de Instagram |
-| Google Analytics / Meta Pixel | (no incluido) | Tus IDs de analítica |
-| Precios (€39 / €45 / €34) | `main.js` (`PRODUCTS`) | Tus precios reales |
+| `heavyweight-sigma.vercel.app` | `index.html` (canonical/OG), `sitemap.xml`, `robots.txt` | Tu dominio real (cuando lo tengas) |
+| Google Analytics / Meta Pixel | (no incluido) | Tus IDs, tras el consentimiento de cookies |
 
-## Notas importantes
+## Notas
 
-- **Fotografía**: las imágenes actuales (`frontal.png`, `trasera.png`) son recortes de producto. Para producción, reemplázalas por fotografía de estudio o mockups reales y regenera los WebP (`npx sharp-cli`, `cwebp`, etc.).
-- **Checkout**: el flujo actual **simula** el pedido (genera un número de orden y vacía el carrito). Para cobrar de verdad, conecta un procesador de pagos (Stripe, MB WAY, etc.) y un backend que persista pedidos.
-- **Analítica**: el código de Google Analytics / Meta Pixel no está incluido por defecto; añádelo tras el consentimiento de cookies.
+- **Fotografía**: reemplaza las imágenes por fotografía de estudio/mockups y regenera los WebP.
+- **Email**: el correo de confirmación se envía desde el webhook cuando el pago se completa.
+- **Analítica**: no incluida por defecto.
 
 ## Licencia
 

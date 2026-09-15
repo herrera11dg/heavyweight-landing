@@ -1,0 +1,13 @@
+{
+  "name": "heavyweight",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HeavyWeight — landing + tienda de camisetas de algodón pesado (Stripe Checkout)",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "resend": "^4.0.0",
+    "stripe": "^16.12.0"
+  }
+}
