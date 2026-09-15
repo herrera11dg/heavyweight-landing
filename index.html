@@ -6,33 +6,33 @@
 <title>HeavyWeight — T-shirts de peso pesado</title>
 
 <!-- SEO -->
-<meta name="description" content="T-shirts de algodão pesado (240–320 gsm) para treinar. Corte boxy, queda firme e gramagem alta que aguenta anos de rotina." data-i18n-content="meta_desc">
+<meta name="description" content="T-shirts portuguesas de algodão pesado de 240 gsm com estampados DTF de grande formato. Corte boxy e queda firme para anos de treino." data-i18n-content="meta_desc">
 <link rel="canonical" href="https://TU-DOMINIO.com/">
-<meta name="theme-color" content="#14110d">
+<meta name="theme-color" content="#0f0f0f">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="HeavyWeight">
-<meta property="og:title" content="HeavyWeight — T-shirts de peso pesado" data-i18n-content="meta_title">
-<meta property="og:description" content="T-shirts de algodão pesado feitas para durar." data-i18n-content="meta_desc">
+<meta property="og:title" content="HeavyWeight — Peso que se nota" data-i18n-content="og_title">
+<meta property="og:description" content="T-shirts portuguesas de algodão pesado para anos de treino." data-i18n-content="meta_desc">
 <meta property="og:url" content="https://TU-DOMINIO.com/">
-<meta property="og:image" content="https://TU-DOMINIO.com/assets/img/frontal.png">
+<meta property="og:image" content="https://TU-DOMINIO.com/assets/img/trasera.png">
 <meta property="og:locale" content="pt_PT">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="HeavyWeight — T-shirts de peso pesado" data-i18n-content="meta_title">
-<meta name="twitter:description" content="T-shirts de algodão pesado feitas para durar." data-i18n-content="meta_desc">
-<meta name="twitter:image" content="https://TU-DOMINIO.com/assets/img/frontal.png">
+<meta name="twitter:title" content="HeavyWeight — Peso que se nota" data-i18n-content="og_title">
+<meta name="twitter:description" content="T-shirts portuguesas de algodão pesado para anos de treino." data-i18n-content="meta_desc">
+<meta name="twitter:image" content="https://TU-DOMINIO.com/assets/img/trasera.png">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-<link rel="apple-touch-icon" href="assets/img/frontal.png">
+<link rel="apple-touch-icon" href="assets/img/trasera.png">
 
 <!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -40,126 +40,270 @@
 
 <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
-<nav>
-  <div class="nav-mark">HeavyWeight</div>
-  <div class="nav-links">
-    <a href="#tienda" data-i18n="nav_shop">Loja</a>
-    <a href="envios.html" data-i18n="nav_shipping">Envios</a>
-    <a href="#contacto" data-i18n="nav_contact">Contacto</a>
-  </div>
-  <div class="nav-right">
-    <div class="lang-switch" role="group" aria-label="Language">
-      <button data-lang="pt" aria-label="Português" aria-pressed="true">PT</button>
-      <button data-lang="en" aria-label="English" aria-pressed="false">EN</button>
-      <button data-lang="es" aria-label="Español" aria-pressed="false">ES</button>
+<header id="site-header">
+  <nav aria-label="Navegação principal">
+    <a href="#inicio" class="nav-mark">Heavy<em>Weight</em></a>
+    <div class="nav-links">
+      <a href="#colecao" data-i18n="nav_shop">Loja</a>
+      <a href="#envios" data-i18n="nav_shipping">Envios</a>
+      <a href="#contacto" data-i18n="nav_contact">Contacto</a>
     </div>
-    <button class="cart-btn" id="open-cart" aria-label="Abrir carrinho de compras">
-      <span data-i18n="cart_label">Carrinho</span> <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
-    </button>
-  </div>
-</nav>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-lang="pt" aria-pressed="true">PT</button><span class="sep">|</span><button data-lang="en" aria-pressed="false">EN</button><span class="sep">|</span><button data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <button class="cart-btn" id="open-cart" aria-label="Abrir carrinho">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
+      </button>
+    </div>
+  </nav>
+</header>
 
 <main id="contenido">
 
-<section class="hero">
-  <div class="hero-label" data-i18n="hero_label">Algodão pesado · série ginásio</div>
-  <h1 class="hero-title" data-i18n-html="hero_title">Peso que<br><span>se nota.</span></h1>
-  <p class="hero-sub" data-i18n="hero_sub">T-shirts de gramagem alta, feitas para durar anos de treino.</p>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-top">
+    <p class="hero-label" data-i18n="hero_label">Made in Portugal / Algodão pesado</p>
+    <h1 class="hero-title" data-i18n="hero_title">Peso que se nota.</h1>
+    <p class="hero-sub" data-i18n="hero_sub">T-shirts de algodão pesado, feitas para durar anos de treino.</p>
+  </div>
 
-  <div class="shirt-stage js-tilt">
-    <div class="shirt-zoom js-zoom">
-      <div class="shirt-flip js-flip">
-        <div class="shirt-face front">
-          <picture>
-            <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
-            <img src="assets/img/frontal.png" alt="T-shirt HeavyWeight Iron Core vista frontal" width="377" height="502" fetchpriority="high">
-          </picture>
-        </div>
-        <div class="shirt-face back">
-          <picture>
-            <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
-            <img src="assets/img/trasera.png" alt="T-shirt HeavyWeight Iron Core vista traseira" width="377" height="502" loading="lazy">
-          </picture>
+  <div class="hero-shirt">
+    <div class="shirt-stage js-tilt">
+      <div class="hero-glow"></div>
+      <div class="shirt-zoom js-zoom">
+        <div class="shirt-flip js-flip">
+          <div class="shirt-face back">
+            <picture>
+              <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
+              <img src="assets/img/trasera.png" alt="T-shirt HeavyWeight One More Rep vista traseira" width="377" height="502" fetchpriority="high">
+            </picture>
+          </div>
+          <div class="shirt-face front">
+            <picture>
+              <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
+              <img src="assets/img/frontal.png" alt="T-shirt HeavyWeight One More Rep vista frontal" width="377" height="502" loading="lazy">
+            </picture>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="flip-hint" data-i18n="flip_hint">Clica para ver as costas</div>
-  <div class="scroll-hint" data-i18n="scroll_hint">DESLIZE</div>
+  <p class="flip-hint" data-i18n="flip_hint">Clica para ver a frente</p>
 </section>
 
-<section class="shop" id="tienda">
+<!-- COLEÇÃO -->
+<section class="shop" id="colecao">
   <div class="shop-head">
     <h2 data-i18n="shop_title">Coleção</h2>
-    <span data-i18n="shop_count">3 produtos</span>
+    <span data-i18n="shop_count">06 produtos</span>
   </div>
 
+  <!-- Destacado -->
   <div class="featured">
     <div class="featured-visual js-tilt">
       <div class="flip js-flip">
-        <div class="face front">
-          <picture>
-            <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
-            <img src="assets/img/frontal.png" alt="T-shirt Iron Core vista frontal" width="377" height="502" loading="lazy">
-          </picture>
-        </div>
         <div class="face back">
           <picture>
-            <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
-            <img src="assets/img/trasera.png" alt="T-shirt Iron Core vista traseira" width="377" height="502" loading="lazy">
+            <source type="image/webp" srcset="assets/img/progress-trasera.webp 1x, assets/img/progress-trasera@2x.webp 2x">
+            <img src="assets/img/progress-trasera.png" alt="T-shirt Progress vista traseira" width="393" height="481" loading="lazy">
+          </picture>
+        </div>
+        <div class="face front">
+          <picture>
+            <source type="image/webp" srcset="assets/img/progress-frente.webp 1x, assets/img/progress-frente@2x.webp 2x">
+            <img src="assets/img/progress-frente.png" alt="T-shirt Progress vista frontal" width="399" height="491" loading="lazy">
           </picture>
         </div>
       </div>
-      <span class="view-tag" data-i18n="flip_hint">Clica para girar</span>
+      <span class="view-tag" data-i18n="flip_hint">Clica para ver a frente</span>
     </div>
 
     <div class="featured-info">
-      <div class="cat" data-i18n="best_seller">Mais vendido</div>
-      <h3 data-i18n="featured_name">Iron Core</h3>
-      <div class="price" id="featured-price">39,00 €</div>
+      <span class="cat" data-i18n="best_seller">Mais vendido</span>
+      <h3 data-i18n="featured_name">Progress</h3>
+      <div class="price" id="featured-price">35,00 €</div>
       <div class="stock-badge" id="stock-badge">Seleciona um tamanho</div>
-      <p class="desc" data-i18n="featured_desc">O nosso corte boxy de referência. Algodão cru de 280 gsm, queda firme que não deforma.</p>
+      <p class="desc" data-i18n="featured_desc">Corte boxy de referência. Algodão 240gsm. Impressão DTF de grande formato nas costas.</p>
 
-      <span class="opt-label" id="color-label" data-i18n="color_label">Cor</span>
-      <div class="colors" id="featured-colors" role="radiogroup" aria-labelledby="color-label"></div>
-
-      <span class="opt-label" id="size-label" data-i18n="size_label">Tamanho</span>
-      <div class="sizes" id="featured-sizes" role="radiogroup" aria-labelledby="size-label"></div>
-
-      <div class="buy-row">
-        <button class="buy-btn" id="featured-buy" data-i18n="buy">Adicionar ao carrinho</button>
+      <div class="buy-row" style="align-items:center; justify-content:space-between;">
+        <span class="opt-label" id="size-label" style="margin:0;" data-i18n="size_label">Tamanho</span>
         <button class="size-guide-link" id="size-guide-link" data-i18n="size_guide">Guia de tamanhos</button>
       </div>
+      <div class="sizes" id="featured-sizes" role="radiogroup" aria-labelledby="size-label"></div>
+
+      <button class="buy-btn" id="featured-buy" data-i18n="buy" style="width:100%; margin-top:20px;">Adicionar ao carrinho</button>
     </div>
   </div>
 
+  <!-- Grid -->
   <div class="grid">
-    <div class="card">
+    <article class="card">
       <div class="card-visual js-tilt">
-        <picture>
-          <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
-          <img src="assets/img/trasera.png" alt="T-shirt Atlas vista traseira" width="377" height="502" loading="lazy">
-        </picture>
+        <div class="flip js-flip">
+          <div class="face back">
+            <picture>
+              <source type="image/webp" srcset="assets/img/again-trasera.webp 1x, assets/img/again-trasera@2x.webp 2x">
+              <img src="assets/img/again-trasera.png" alt="T-shirt Again vista traseira" width="517" height="457" loading="lazy">
+            </picture>
+          </div>
+          <div class="face front">
+            <picture>
+              <source type="image/webp" srcset="assets/img/again-frente.webp 1x, assets/img/again-frente@2x.webp 2x">
+              <img src="assets/img/again-frente.png" alt="T-shirt Again vista frontal" width="399" height="491" loading="lazy">
+            </picture>
+          </div>
+        </div>
       </div>
-      <div class="card-name" data-i18n="atlas_name">Atlas</div>
-      <div class="card-meta">
-        <span data-price="atlas">45,00 €</span>
-        <button class="add" data-product="atlas" data-i18n-aria="add" data-i18n="add" aria-label="Adicionar Atlas ao carrinho">Adicionar</button>
+      <div class="card-info">
+        <div>
+          <div class="card-meta">240 GSM</div>
+          <h3 class="card-name">Again</h3>
+          <div class="card-price" data-price="again">35,00 €</div>
+        </div>
+        <button class="add" data-product="again" data-i18n="add" aria-label="Adicionar Again ao carrinho">Adicionar</button>
       </div>
+    </article>
+
+    <article class="card">
+      <div class="card-visual js-tilt">
+        <div class="flip js-flip">
+          <div class="face back">
+            <picture>
+              <source type="image/webp" srcset="assets/img/focus-trasera.webp 1x, assets/img/focus-trasera@2x.webp 2x">
+              <img src="assets/img/focus-trasera.png" alt="T-shirt Focus vista traseira" width="400" height="523" loading="lazy">
+            </picture>
+          </div>
+          <div class="face front">
+            <picture>
+              <source type="image/webp" srcset="assets/img/focus-frente.webp 1x, assets/img/focus-frente@2x.webp 2x">
+              <img src="assets/img/focus-frente.png" alt="T-shirt Focus vista frontal" width="399" height="491" loading="lazy">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div>
+          <div class="card-meta">240 GSM</div>
+          <h3 class="card-name">Focus</h3>
+          <div class="card-price" data-price="focus">35,00 €</div>
+        </div>
+        <button class="add" data-product="focus" data-i18n="add" aria-label="Adicionar Focus ao carrinho">Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-visual js-tilt">
+        <div class="flip js-flip">
+          <div class="face back">
+            <picture>
+              <source type="image/webp" srcset="assets/img/gojo-trasera.webp 1x, assets/img/gojo-trasera@2x.webp 2x">
+              <img src="assets/img/gojo-trasera.png" alt="T-shirt Gojo vista traseira" width="425" height="530" loading="lazy">
+            </picture>
+          </div>
+          <div class="face front">
+            <picture>
+              <source type="image/webp" srcset="assets/img/gojo-frente.webp 1x, assets/img/gojo-frente@2x.webp 2x">
+              <img src="assets/img/gojo-frente.png" alt="T-shirt Gojo vista frontal" width="399" height="508" loading="lazy">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div>
+          <div class="card-meta">240 GSM</div>
+          <h3 class="card-name">Gojo</h3>
+          <div class="card-price" data-price="gojo">35,00 €</div>
+        </div>
+        <button class="add" data-product="gojo" data-i18n="add" aria-label="Adicionar Gojo ao carrinho">Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-visual js-tilt">
+        <div class="flip js-flip">
+          <div class="face back">
+            <picture>
+              <source type="image/webp" srcset="assets/img/toji-trasera.webp 1x, assets/img/toji-trasera@2x.webp 2x">
+              <img src="assets/img/toji-trasera.png" alt="T-shirt Toji vista traseira" width="376" height="502" loading="lazy">
+            </picture>
+          </div>
+          <div class="face front">
+            <picture>
+              <source type="image/webp" srcset="assets/img/toji-frente.webp 1x, assets/img/toji-frente@2x.webp 2x">
+              <img src="assets/img/toji-frente.png" alt="T-shirt Toji vista frontal" width="399" height="468" loading="lazy">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div>
+          <div class="card-meta">240 GSM</div>
+          <h3 class="card-name">Toji</h3>
+          <div class="card-price" data-price="toji">35,00 €</div>
+        </div>
+        <button class="add" data-product="toji" data-i18n="add" aria-label="Adicionar Toji ao carrinho">Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-visual js-tilt">
+        <div class="flip js-flip">
+          <div class="face back">
+            <picture>
+              <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
+              <img src="assets/img/trasera.png" alt="T-shirt One More Rep vista traseira" width="377" height="502" loading="lazy">
+            </picture>
+          </div>
+          <div class="face front">
+            <picture>
+              <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
+              <img src="assets/img/frontal.png" alt="T-shirt One More Rep vista frontal" width="377" height="502" loading="lazy">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div>
+          <div class="card-meta">240 GSM</div>
+          <h3 class="card-name">One More Rep</h3>
+          <div class="card-price" data-price="one-more-rep">35,00 €</div>
+        </div>
+        <button class="add" data-product="one-more-rep" data-i18n="add" aria-label="Adicionar One More Rep ao carrinho">Adicionar</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- PERSONALIZAÇÃO -->
+<section class="custom-order" id="personalizar">
+  <div class="custom-inner">
+    <h2 data-i18n="custom_title">Não encontras o teu estilo?</h2>
+    <p data-i18n="custom_text">Pergunta-nos e analisamos o teu pedido. Podemos criar estampados e designs personalizados.</p>
+    <a href="mailto:hello@heavyweight.pt" class="buy-btn" data-i18n="custom_cta">Fala connosco</a>
+  </div>
+</section>
+
+<!-- ENVIOS -->
+<section class="envios" id="envios">
+  <div class="envios-grid">
+    <div class="envio-item">
+      <span class="num">01</span>
+      <h3 data-i18n="env1_title">Envio nacional</h3>
+      <p data-i18n="env1_text">2–4 dias úteis em Portugal Continental.</p>
     </div>
-    <div class="card">
-      <div class="card-visual js-tilt">
-        <picture>
-          <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
-          <img src="assets/img/frontal.png" alt="T-shirt Grind vista frontal" width="377" height="502" loading="lazy">
-        </picture>
-      </div>
-      <div class="card-name" data-i18n="grind_name">Grind</div>
-      <div class="card-meta">
-        <span data-price="grind">34,00 €</span>
-        <button class="add" data-product="grind" data-i18n="add" aria-label="Adicionar Grind ao carrinho">Adicionar</button>
-      </div>
+    <div class="envio-item">
+      <span class="num">02</span>
+      <h3 data-i18n="env2_title">Peso real</h3>
+      <p data-i18n="env2_text">Algodão pesado de 240gsm.</p>
+    </div>
+    <div class="envio-item">
+      <span class="num">03</span>
+      <h3 data-i18n="env3_title">Feito para durar</h3>
+      <p data-i18n="env3_text">Corte boxy e impressão DTF resistente.</p>
     </div>
   </div>
 </section>
@@ -168,44 +312,50 @@
 
 <footer id="contacto">
   <div class="footer-top">
-    <div class="footer-brand">Heavy<em>Weight</em></div>
-    <div class="footer-links">
-      <div class="footer-col">
-        <h5 data-i18n="footer_shop">Loja</h5>
-        <a href="#tienda" data-i18n="footer_collection">Coleção</a>
-        <button class="size-guide-link" data-open-modal="size-guide-modal" data-i18n="size_guide" style="display:block;">Guia de tamanhos</button>
-        <a href="#tienda" data-i18n="footer_new">Novidades</a>
-      </div>
-      <div class="footer-col">
-        <h5 data-i18n="footer_help">Ajuda</h5>
-        <a href="envios.html" data-i18n="footer_shipping">Envios e devoluções</a>
-        <a href="termos.html" data-i18n="footer_terms">Termos e condições</a>
-        <a href="privacidade.html" data-i18n="footer_privacy">Política de privacidade</a>
-      </div>
-      <div class="footer-col">
-        <h5 data-i18n="footer_contact">Contacto</h5>
-        <a href="https://instagram.com/TU-CUENTA" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:hola@TU-DOMINIO.com">Email</a>
-      </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_shop">Loja</h3>
+      <ul>
+        <li><a href="#colecao" data-i18n="footer_collection">Coleção</a></li>
+        <li><button class="size-guide-link" data-open-modal="size-guide-modal" data-i18n="size_guide" style="display:block;">Guia de tamanhos</button></li>
+        <li><a href="#colecao" data-i18n="footer_new">Novidades</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_help">Ajuda</h3>
+      <ul>
+        <li><a href="envios.html" data-i18n="footer_shipping">Envios e devoluções</a></li>
+        <li><a href="termos.html" data-i18n="footer_terms">Termos e condições</a></li>
+        <li><a href="privacidade.html" data-i18n="footer_privacy">Política de privacidade</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_contact">Contacto</h3>
+      <ul>
+        <li><a href="https://instagram.com/TU-CUENTA" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="mailto:hello@heavyweight.pt">hello@heavyweight.pt</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span data-i18n="footer_rights">© 2026 HeavyWeight™ — Todos os direitos reservados</span>
-    <span data-i18n="footer_tag">Algodão pesado · Envios para todo o país</span>
+    <span data-i18n="footer_rights">© 2026 HeavyWeight. Todos os direitos reservados.</span>
+    <span data-i18n="footer_made">Projetado em Portugal.</span>
   </div>
 </footer>
 
 <!-- Drawer del carrito -->
 <div class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
   <div class="cart-head">
-    <h3 id="cart-title" data-i18n="cart_title">O teu carrinho</h3>
+    <div>
+      <h3 id="cart-title" data-i18n="cart_title">O teu carrinho</h3>
+      <div class="cart-sub" id="cart-sub"></div>
+    </div>
     <button class="close" id="close-cart" aria-label="Fechar carrinho">×</button>
   </div>
   <div class="cart-items" id="cart-items"></div>
   <div class="cart-foot">
     <div class="cart-total">
       <span data-i18n="cart_total">Total</span>
-      <span id="cart-total">0,00 €</span>
+      <span class="total-amount" id="cart-total">0,00 €</span>
     </div>
     <button class="checkout-btn" id="checkout-btn" data-i18n="cart_checkout">Finalizar compra</button>
   </div>
@@ -216,7 +366,7 @@
   <div class="modal">
     <button class="close" data-close aria-label="Fechar">×</button>
     <h3 id="size-guide-title" data-i18n="sg_title">Guia de tamanhos</h3>
-    <p style="color:var(--sand); margin-bottom:8px;" data-i18n="sg_sub">Medidas em centímetros. Corte boxy: recomendamos o teu tamanho habitual.</p>
+    <p style="color:var(--muted-foreground); margin-bottom:8px;" data-i18n="sg_sub">Medidas da peça em centímetros.</p>
     <table class="size-table">
       <thead>
         <tr>
@@ -241,7 +391,8 @@
   <div class="modal">
     <button class="close" data-close aria-label="Fechar">×</button>
     <h3 id="checkout-title" data-i18n="co_title">Finalizar compra</h3>
-    <form id="checkout-form">
+    <p style="color:var(--muted-foreground); font-size:14px; margin-bottom:16px;" data-i18n="co_sub">Preenche os teus dados para reservar o pedido.</p>
+    <form id="checkout-form" novalidate>
       <div class="form-group">
         <label for="f-name" data-i18n="co_name">Nome completo</label>
         <input type="text" id="f-name" name="name" autocomplete="name" required>
@@ -258,8 +409,8 @@
         <label for="f-address" data-i18n="co_address">Morada de envio</label>
         <input type="text" id="f-address" name="address" autocomplete="street-address" required>
       </div>
-      <p id="checkout-error" style="display:none; color:var(--copper); font-size:13px; margin-bottom:12px;" data-i18n="co_error">Preenche nome, email e morada.</p>
-      <button type="submit" class="checkout-btn" data-i18n="co_confirm">Confirmar pedido</button>
+      <p id="checkout-error" style="display:none; color:var(--primary); font-size:13px; margin-bottom:12px;" data-i18n="co_error">Preenche nome, email e morada.</p>
+      <button type="submit" class="checkout-btn" id="checkout-confirm" data-i18n="co_confirm">Confirmar pedido</button>
     </form>
   </div>
 </div>
@@ -268,20 +419,25 @@
 <div class="modal-backdrop" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="order-title">
   <div class="modal" style="text-align:center;">
     <button class="close" data-close aria-label="Fechar">×</button>
-    <h3 id="order-title" data-i18n="order_title">Obrigado pela tua compra!</h3>
-    <p style="color:var(--sand); margin-bottom:8px;" data-i18n="order_text">O teu pedido foi registado com o número</p>
-    <p style="font-family:'Space Mono',monospace; font-size:24px; color:var(--copper); margin-bottom:16px;" id="order-number">—</p>
-    <p style="color:var(--stone); font-size:14px;" data-i18n="order_note">Vamos contactar-te para coordenar o pagamento e o envio.</p>
+    <p style="font-family:'Space Mono',monospace; font-size:12px; color:var(--primary); letter-spacing:0.08em;" data-i18n="order_confirmed">Pedido confirmado</p>
+    <h3 id="order-title" style="margin-top:16px;" data-i18n="order_title">Obrigado pela tua compra!</h3>
+    <p style="font-family:'Space Mono',monospace; font-size:20px; color:var(--primary); margin:20px 0;" id="order-number">—</p>
+    <p style="color:var(--muted-foreground); font-size:14px;" data-i18n="order_note">Vamos contactar-te para coordenar pagamento e envio.</p>
   </div>
 </div>
 
 <!-- Banner de cookies -->
 <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Aviso de cookies">
-  <p data-i18n-html="cookie_text">Usamos cookies para melhorar a tua experiência e, com o teu consentimento, para analítica (Google Analytics / Meta Pixel). Consulta a nossa <a href="privacidade.html" style="color:var(--copper);">política de privacidade</a>.</p>
+  <p data-i18n-html="cookie_text">Usamos cookies essenciais para melhorar a tua experiência. Consulta a nossa <a href="privacidade.html">política de privacidade</a>.</p>
   <div class="cookie-actions">
-    <button class="btn btn-ghost" id="cookies-reject" data-i18n="cookie_essential">Só essenciais</button>
+    <button class="btn btn-ghost" id="cookies-reject" data-i18n="cookie_essential">Recusar</button>
     <button class="btn btn-primary" id="cookies-accept" data-i18n="cookie_accept">Aceitar</button>
   </div>
+</div>
+
+<!-- Botón de compra móvil -->
+<div class="mobile-buy" id="mobile-buy">
+  <button class="buy-btn" id="mobile-buy-btn">Adicionar Progress · 35,00 €</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

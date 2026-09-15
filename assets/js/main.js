@@ -4,26 +4,45 @@
    ============================================================ */
 
 /* ---------- Catálogo (precios en euros) ---------- */
+const SHARED_COLORS = ['#0d0d0d', '#3c3c3c', '#1f3a2d', '#1c2b3a', '#8f8f8f', '#e8e6e1'];
+const SHARED_COLOR_NAMES = ['Black', 'Dark Grey', 'Forrest Green', 'Navy Blue', 'Heather Grey', 'Snow Grey'];
+
 const PRODUCTS = {
-  'iron-core': {
-    name: 'Iron Core',
-    price: 39,
-    gsm: 280,
-    colors: ['#14110d', '#3a3733', '#8a8578'],
-    colorNames: ['color_black', 'color_graphite', 'color_taupe'],
-    sizes: { S: 5, M: 9, L: 7, XL: 2 }
+  'progress': {
+    name: 'Progress', price: 35, gsm: 240,
+    img: 'assets/img/progress-frente.webp',
+    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
+    sizes: { S: 2, M: 3, L: 3, XL: 2 }
   },
-  'atlas': {
-    name: 'Atlas',
-    price: 45,
-    gsm: 320,
-    sizes: { S: 3, M: 6, L: 4, XL: 0 }
+  'again': {
+    name: 'Again', price: 35, gsm: 240,
+    img: 'assets/img/again-frente.webp',
+    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
+    sizes: { S: 2, M: 2, L: 2, XL: 1 }
   },
-  'grind': {
-    name: 'Grind',
-    price: 34,
-    gsm: 240,
-    sizes: { S: 8, M: 11, L: 9, XL: 5 }
+  'focus': {
+    name: 'Focus', price: 35, gsm: 240,
+    img: 'assets/img/focus-frente.webp',
+    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
+    sizes: { S: 2, M: 3, L: 2, XL: 1 }
+  },
+  'gojo': {
+    name: 'Gojo', price: 35, gsm: 240,
+    img: 'assets/img/gojo-frente.webp',
+    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
+    sizes: { S: 1, M: 2, L: 2, XL: 1 }
+  },
+  'toji': {
+    name: 'Toji', price: 35, gsm: 240,
+    img: 'assets/img/toji-frente.webp',
+    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
+    sizes: { S: 2, M: 2, L: 1, XL: 1 }
+  },
+  'one-more-rep': {
+    name: 'One More Rep', price: 35, gsm: 240,
+    img: 'assets/img/frontal.webp',
+    colors: SHARED_COLORS, colorNames: SHARED_COLOR_NAMES,
+    sizes: { S: 2, M: 3, L: 2, XL: 2 }
   }
 };
 
@@ -60,11 +79,13 @@ function addToCart(productId, size, colorName, qty = 1) {
       size,
       color: colorName || null,
       qty,
-      img: productId === 'iron-core' ? 'assets/img/frontal.webp' : (productId === 'atlas' ? 'assets/img/trasera.webp' : 'assets/img/frontal.webp')
+      img: p.img
     });
   }
   saveCart(cart);
   updateCartBadge();
+  const badge = document.getElementById('cart-count');
+  if (badge) { badge.classList.remove('bounce'); void badge.offsetWidth; badge.classList.add('bounce'); }
   renderCart();
   openCartDrawer();
 }
@@ -93,15 +114,18 @@ function renderCart() {
   if (!wrap) return;
   const cart = getCart();
 
+  const sub = document.getElementById('cart-sub');
+  if (sub) sub.textContent = cartCount(cart) + ' ' + t('cart_items_count');
+
   if (cart.length === 0) {
     wrap.innerHTML = `<p class="cart-empty">${t('cart_empty')}</p>`;
   } else {
     wrap.innerHTML = cart.map((i) => `
       <div class="cart-item">
-        <img src="${i.img}" alt="" width="60" height="80" loading="lazy">
+        <img src="${i.img}" alt="" width="64" height="80" loading="lazy">
         <div class="cart-item-info">
           <div class="cart-item-name">${i.name}</div>
-          <div class="cart-item-var">${i.size ? t('size_prefix') + ' ' + i.size : ''}${i.color ? ' · ' + t(i.color) : ''}</div>
+          <div class="cart-item-var">${i.size ? t('size_prefix') + ' ' + i.size : ''}${i.color ? ' / ' + i.color : ''}</div>
           <div class="cart-item-price">${formatPrice(i.price)}</div>
           <div class="cart-qty">
             <button data-dec="${i.key}" aria-label="${t('cart_dec')}">−</button>
@@ -145,12 +169,10 @@ let renderFeatured = function () {};
 
 function initFeatured() {
   const sizesWrap = document.getElementById('featured-sizes');
-  const colorsWrap = document.getElementById('featured-colors');
   const stockBadge = document.getElementById('stock-badge');
   const buyBtn = document.getElementById('featured-buy');
-  const p = PRODUCTS['iron-core'];
-  let selectedSize = null;
-  let selectedColor = p.colorNames[0];
+  const p = PRODUCTS['progress'];
+  let selectedSize = 'M';
 
   renderFeatured = function () {
     // tallas
@@ -158,14 +180,6 @@ function initFeatured() {
       <button class="size ${selectedSize === size ? 'active' : ''}"
         data-size="${size}" ${stock === 0 ? 'disabled' : ''}
         aria-label="${t('size_label')} ${size}">${size}</button>
-    `).join('');
-
-    // colores
-    colorsWrap.innerHTML = p.colors.map((c, idx) => `
-      <button class="color ${selectedColor === p.colorNames[idx] ? 'active' : ''}"
-        data-color="${p.colorNames[idx]}" aria-label="${t('color_label')} ${t(p.colorNames[idx])}">
-        <span class="swatch" style="background:${c}"></span>
-      </button>
     `).join('');
 
     // stock
@@ -200,20 +214,18 @@ function initFeatured() {
     renderFeatured();
   });
 
-  colorsWrap.addEventListener('click', (e) => {
-    const btn = e.target.closest('.color');
-    if (!btn) return;
-    selectedColor = btn.dataset.color;
-    renderFeatured();
+  buyBtn.addEventListener('click', () => {
+    addFeaturedToCart();
   });
 
-  buyBtn.addEventListener('click', () => {
+  function addFeaturedToCart() {
     if (!selectedSize) { renderFeatured(); return; }
-    addToCart('iron-core', selectedSize, selectedColor);
+    addToCart('progress', selectedSize, null);
     buyBtn.classList.add('added');
     buyBtn.textContent = t('added');
     setTimeout(() => { buyBtn.classList.remove('added'); buyBtn.textContent = t('buy'); }, 1400);
-  });
+  }
+  window.addFeaturedToCart = addFeaturedToCart;
 
   renderFeatured();
 }
@@ -221,10 +233,12 @@ function initFeatured() {
 /* ---------- Precios dinámicos ---------- */
 function renderPrices() {
   const fp = document.getElementById('featured-price');
-  if (fp) fp.textContent = formatPrice(PRODUCTS['iron-core'].price);
+  if (fp) fp.textContent = formatPrice(PRODUCTS['progress'].price);
   document.querySelectorAll('[data-price]').forEach((el) => {
     el.textContent = formatPrice(PRODUCTS[el.dataset.price].price);
   });
+  const mb = document.getElementById('mobile-buy-btn');
+  if (mb) mb.textContent = t('buy') + ' ' + PRODUCTS['progress'].name + ' · ' + formatPrice(PRODUCTS['progress'].price);
 }
 
 /* ---------- Grid de productos ---------- */
@@ -329,6 +343,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initGrid();
   initCookies();
   initFlips();
+
+  // Nav: fondo sólido al hacer scroll
+  const header = document.getElementById('site-header');
+  const onScroll = () => header && header.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Botón de compra móvil
+  const mobileBuy = document.getElementById('mobile-buy-btn');
+  if (mobileBuy) mobileBuy.addEventListener('click', () => window.addFeaturedToCart && window.addFeaturedToCart());
 
   // Carrito
   document.getElementById('open-cart').addEventListener('click', openCartDrawer);
