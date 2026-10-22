@@ -386,14 +386,14 @@ function initAnimations() {
   heroTl
     .from('.hero-drop', { y: -20, opacity: 0, duration: 0.6 })
     .from('.hero-title', { y: 60, opacity: 0, duration: 1 }, '-=0.3')
-    .from('.hero-shirt', { scale: 0.85, opacity: 0, duration: 1.2 }, '-=0.7')
+    .from('.hero-example', { y: 40, opacity: 0, scale: 0.94, duration: 1.1, stagger: 0.12 }, '-=0.7')
     .from('.hero-sub, .hero-cta', { y: 30, opacity: 0, duration: 0.8, stagger: 0.1 }, '-=0.5');
 
   // Parallax del hero
-  gsap.fromTo('.hero-shirt',
+  gsap.fromTo('.hero-showcase',
     { y: 0 },
     {
-      y: -120, ease: 'none',
+      y: -60, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
     }
   );

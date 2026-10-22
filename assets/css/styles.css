@@ -132,26 +132,26 @@ nav{
 /* ---------- HERO ---------- */
 .hero{
   position:relative; min-height:100vh;
-  display:flex; flex-direction:column; align-items:center;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
   overflow:hidden; border-bottom:1px solid var(--border);
   padding:120px 20px 48px; text-align:center;
+}
+.hero-copy{
+  position:relative; z-index:2;
+  display:flex; flex-direction:column; align-items:center;
 }
 .hero-drop{
   position:relative; z-index:3;
   font-family:var(--font-mono); font-size:11px;
   text-transform:uppercase; letter-spacing:0.3em;
-  color:var(--muted-foreground); margin-bottom:8px;
+  color:var(--muted-foreground); margin-bottom:16px;
 }
 .hero-title{
-  position:absolute; top:50%; left:50%;
-  transform:translate(-50%,-50%);
-  z-index:1; pointer-events:none;
   font-family:var(--font-display);
-  font-size:clamp(64px, 15vw, 220px);
-  line-height:0.82; text-transform:uppercase;
+  font-size:clamp(52px, 15vw, 84px);
+  line-height:0.85; text-transform:uppercase;
   letter-spacing:-0.01em; text-align:center;
-  color:var(--foreground); opacity:0.85;
-  white-space:nowrap;
+  color:var(--foreground); margin:0;
 }
 .hero-sub{
   position:relative; z-index:3; margin-top:28px;
@@ -168,39 +168,24 @@ nav{
 }
 .hero-cta:hover{background:var(--action-hover);}
 
-.hero-shirt{
-  position:relative; z-index:2; flex:1;
-  display:flex; align-items:center; justify-content:center;
-  width:100%; max-width:30rem;
+.hero-showcase{
+  position:relative; z-index:2;
+  display:flex; align-items:flex-end; justify-content:center;
+  gap:16px; width:100%; max-width:34rem; margin-top:32px;
 }
-.shirt-stage{
-  position:relative;
-  perspective:1400px; transform-style:preserve-3d;
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer;
+.hero-example{
+  flex:1; max-width:15rem; margin:0;
 }
-.shirt-flip{
-  position:relative; transform-style:preserve-3d;
-  transition:transform .7s ease;
-  will-change:transform;
-}
-.shirt-flip.is-flipped{transform:rotateY(180deg);}
-.shirt-face{
-  backface-visibility:hidden; -webkit-backface-visibility:hidden;
-  display:block;
-}
-.shirt-face img{
-  height:58vh; max-height:620px; width:auto; display:block;
+.hero-example img{
+  width:100%; height:auto; display:block;
   object-fit:contain;
-  box-shadow:0 40px 80px rgba(0,0,0,0.6);
+  box-shadow:0 28px 60px rgba(0,0,0,0.55);
 }
-.shirt-face.front{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotateY(180deg);}
-
-.flip-hint{
-  position:relative; z-index:3; margin-top:16px;
+.hero-example figcaption{
+  margin-top:12px;
   font-family:var(--font-mono); font-size:10px;
-  text-transform:uppercase; letter-spacing:0.08em;
-  color:var(--muted-foreground);
+  text-transform:uppercase; letter-spacing:0.18em;
+  color:var(--muted-foreground); text-align:center;
 }
 
 /* ---------- ETIQUETAS DE SECCIÓN ---------- */
@@ -607,20 +592,30 @@ footer{max-width:80rem; margin:0 auto; padding:80px 20px 32px;}
   .grid{grid-template-columns:repeat(3,1fr);}
   .card-visual{height:430px;}
   .card-visual .face img{height:350px;}
+  .hero{
+    display:grid; grid-template-columns:1fr 1fr;
+    align-items:center; text-align:left;
+    gap:48px; padding:120px 64px 64px;
+  }
+  .hero-copy{align-items:flex-start; text-align:left;}
+  .hero-title{
+    font-size:clamp(56px, 7vw, 120px);
+    text-align:left; line-height:0.84;
+  }
+  .hero-showcase{
+    margin-top:0; max-width:none;
+    gap:24px; align-items:center;
+  }
+  .hero-example{max-width:none;}
+  .hero-example img{width:100%; height:auto; margin:0 auto;}
+  .hero-example:nth-child(1){margin-top:-24px;}
+  .hero-example:nth-child(2){margin-top:24px;}
 }
 
 /* ---------- MÓVIL ---------- */
 @media (max-width:640px){
   .hero{padding:110px 16px 40px;}
-  .hero-title{
-    position:relative; top:auto; left:auto; transform:none;
-    z-index:2; pointer-events:none;
-    font-size:clamp(52px, 15vw, 84px);
-    white-space:normal; line-height:0.85;
-    margin:4px 0 20px; opacity:1;
-  }
-  .hero-shirt{max-width:min(78vw, 22rem);}
-  .hero-shirt img{height:46vh; max-height:440px;}
+  .hero-showcase{max-width:min(88vw, 24rem); gap:12px; margin-top:24px;}
   .hero-sub{letter-spacing:0.16em; font-size:11px; margin-top:20px;}
   .hero-cta{padding:16px 28px; margin-top:18px;}
   .card-visual{height:320px;}
