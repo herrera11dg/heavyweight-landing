@@ -5,35 +5,34 @@
 
 /* ---------- Catálogo (fallback local; el stock real viene de /api/products) ---------- */
 const PRODUCTS = {
-  'progress': {
-    name: 'Progress', price: 35, gsm: 240,
-    img: 'assets/img/progress-frente.webp',
-    sizes: { S: 2, M: 3, L: 3, XL: 2 }
-  },
   'again': {
     name: 'Again', price: 35, gsm: 240,
-    img: 'assets/img/again-frente.webp',
-    sizes: { S: 2, M: 2, L: 2, XL: 1 }
+    img: 'assets/img/again-back.webp',
+    sizes: { S: 2, M: 3, L: 2, XL: 1 }
+  },
+  'discipline': {
+    name: 'Discipline', price: 35, gsm: 240,
+    img: 'assets/img/discipline-back.webp',
+    sizes: { S: 2, M: 3, L: 2, XL: 1 }
   },
   'focus': {
     name: 'Focus', price: 35, gsm: 240,
-    img: 'assets/img/focus-frente.webp',
-    sizes: { S: 2, M: 3, L: 2, XL: 1 }
-  },
-  'gojo': {
-    name: 'Gojo', price: 35, gsm: 240,
-    img: 'assets/img/gojo-frente.webp',
-    sizes: { S: 1, M: 2, L: 2, XL: 1 }
-  },
-  'toji': {
-    name: 'Toji', price: 35, gsm: 240,
-    img: 'assets/img/toji-frente.webp',
-    sizes: { S: 2, M: 2, L: 1, XL: 1 }
+    img: 'assets/img/focus-back.webp',
+    sizes: { S: 2, M: 3, L: 2, XL: 1 },
+    colors: [
+      { id: 'dark', name: 'color_dark', back: 'assets/img/focus-back.webp', front: 'assets/img/focus-front.webp' },
+      { id: 'vinotinto', name: 'color_wine', back: 'assets/img/focus-vinotinto-back.webp', front: 'assets/img/focus-vinotinto-front.webp' }
+    ]
   },
   'one-more-rep': {
     name: 'One More Rep', price: 35, gsm: 240,
-    img: 'assets/img/frontal.webp',
+    img: 'assets/img/one-more-rep-back.webp',
     sizes: { S: 2, M: 3, L: 2, XL: 2 }
+  },
+  'toji-fushiguro': {
+    name: 'Toji Fushiguro', price: 35, gsm: 240,
+    img: 'assets/img/toji-fushiguro-back.webp',
+    sizes: { S: 2, M: 3, L: 2, XL: 1 }
   }
 };
 
@@ -69,10 +68,11 @@ function updateCartBadge() {
 }
 
 /* ---------- Añadir al carrito ---------- */
-function addToCart(productId, size, qty = 1) {
+function addToCart(productId, size, qty = 1, colorId) {
   const p = PRODUCTS[productId];
   const cart = getCart();
-  const key = productId + '|' + size;
+  const color = colorId && p.colors ? p.colors.find((c) => c.id === colorId) : null;
+  const key = productId + '|' + size + '|' + (color ? color.id : '');
   const existing = cart.find((i) => i.key === key);
   if (existing) existing.qty += qty;
   else {
@@ -83,7 +83,9 @@ function addToCart(productId, size, qty = 1) {
       price: p.price,
       size,
       qty,
-      img: p.img
+      img: color ? color.back : p.img,
+      colorId: color ? color.id : null,
+      colorName: color ? color.name : null
     });
   }
   saveCart(cart);
@@ -129,7 +131,7 @@ function renderCart() {
         <img src="${i.img}" alt="" width="64" height="80" loading="lazy">
         <div class="cart-item-info">
           <div class="cart-item-name">${i.name}</div>
-          <div class="cart-item-var">${i.size ? t('size_prefix') + ' ' + i.size : ''}</div>
+          <div class="cart-item-var">${i.size ? t('size_prefix') + ' ' + i.size : ''}${i.colorName ? ' · ' + t(i.colorName) : ''}</div>
           <div class="cart-item-price">${formatPrice(i.price)}</div>
           <div class="cart-qty">
             <button data-dec="${i.key}" aria-label="${t('cart_dec')}">−</button>
@@ -201,7 +203,7 @@ function initFeatured() {
   const sizesWrap = document.getElementById('featured-sizes');
   const stockBadge = document.getElementById('stock-badge');
   const buyBtn = document.getElementById('featured-buy');
-  const p = PRODUCTS['progress'];
+  const p = PRODUCTS['toji-fushiguro'];
   let selectedSize = 'M';
 
   renderFeatured = function () {
@@ -250,7 +252,7 @@ function initFeatured() {
 
   function addFeaturedToCart() {
     if (!selectedSize) { renderFeatured(); return; }
-    addToCart('progress', selectedSize);
+    addToCart('toji-fushiguro', selectedSize);
     buyBtn.classList.add('added');
     buyBtn.textContent = t('added');
     setTimeout(() => { buyBtn.classList.remove('added'); buyBtn.textContent = t('buy'); }, 1400);
@@ -263,21 +265,58 @@ function initFeatured() {
 /* ---------- Precios dinámicos ---------- */
 function renderPrices() {
   const fp = document.getElementById('featured-price');
-  if (fp) fp.textContent = formatPrice(PRODUCTS['progress'].price);
+  if (fp) fp.textContent = formatPrice(PRODUCTS['toji-fushiguro'].price);
   document.querySelectorAll('[data-price]').forEach((el) => {
     el.textContent = formatPrice(PRODUCTS[el.dataset.price].price);
   });
   const mb = document.getElementById('mobile-buy-btn');
-  if (mb) mb.textContent = t('buy') + ' ' + PRODUCTS['progress'].name + ' · ' + formatPrice(PRODUCTS['progress'].price);
+  if (mb) mb.textContent = t('buy') + ' ' + PRODUCTS['toji-fushiguro'].name + ' · ' + formatPrice(PRODUCTS['toji-fushiguro'].price);
 }
 
 /* ---------- Grid de productos ---------- */
 function initGrid() {
+  // Selector de color (solo productos con variantes de color, ej. Focus)
+  document.querySelectorAll('[data-color-product]').forEach((wrap) => {
+    const id = wrap.dataset.colorProduct;
+    const p = PRODUCTS[id];
+    if (!p || !p.colors) return;
+    const card = wrap.closest('.card');
+    const backImg = card && card.querySelector('.face.back img');
+    const frontImg = card && card.querySelector('.face.front img');
+    const backSrc = card && card.querySelector('.face.back source');
+    const frontSrc = card && card.querySelector('.face.front source');
+
+    const webpSrcset = (base) => base + ' 1x, ' + base.replace('.webp', '@2x.webp') + ' 2x';
+
+    const applyColor = (colorId) => {
+      wrap.querySelectorAll('.color-swatch').forEach((sw) =>
+        sw.classList.toggle('active', sw.dataset.color === colorId)
+      );
+      const c = p.colors.find((col) => col.id === colorId);
+      if (!c) return;
+      if (backImg) backImg.src = c.back;
+      if (backSrc) backSrc.srcset = webpSrcset(c.back);
+      if (frontImg) frontImg.src = c.front;
+      if (frontSrc) frontSrc.srcset = webpSrcset(c.front);
+      wrap.dataset.active = colorId;
+    };
+
+    wrap.addEventListener('click', (e) => {
+      const sw = e.target.closest('.color-swatch');
+      if (!sw) return;
+      applyColor(sw.dataset.color);
+    });
+
+    applyColor(p.colors[0].id);
+  });
+
   document.querySelectorAll('.card .add').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const id = btn.dataset.product;
-      addToCart(id, 'M');
+      const wrap = btn.closest('.card').querySelector('[data-color-product]');
+      const colorId = wrap ? wrap.dataset.active : null;
+      addToCart(id, 'M', 1, colorId);
     });
   });
 }
@@ -342,24 +381,45 @@ function initAnimations() {
 
   if (reduce) return; // respeta reducir movimiento
 
-  gsap.from('.hero-label, .hero-title, .hero-sub', { y: 40, opacity: 0, duration: 1, ease: 'power4.out', stagger: 0.08 });
-  gsap.from('.js-zoom', { scale: 0.6, y: 80, opacity: 0, duration: 1.2, ease: 'power4.out', delay: 0.2 });
+  // Hero — timeline cinematográfica
+  const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  heroTl
+    .from('.hero-drop', { y: -20, opacity: 0, duration: 0.6 })
+    .from('.hero-title', { y: 60, opacity: 0, duration: 1 }, '-=0.3')
+    .from('.hero-shirt', { scale: 0.85, opacity: 0, duration: 1.2 }, '-=0.7')
+    .from('.hero-sub, .hero-cta', { y: 30, opacity: 0, duration: 0.8, stagger: 0.1 }, '-=0.5');
 
-  gsap.fromTo('.js-zoom',
-    { scale: 0.7, y: 60 },
+  // Parallax del hero
+  gsap.fromTo('.hero-shirt',
+    { y: 0 },
     {
-      scale: 1.6, y: -140, ease: 'none',
+      y: -120, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
     }
   );
 
+  // Apariciones por scroll
   gsap.from('.shop-head', { y: 40, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.shop', start: 'top 75%' } });
   gsap.from('.featured-info', { x: -60, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.featured', start: 'top 70%' } });
   gsap.from('.featured-visual', { x: 60, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.featured', start: 'top 70%' } });
   gsap.from('.card', { y: 60, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.15, scrollTrigger: { trigger: '.grid', start: 'top 75%' } });
+  gsap.from('.manifesto-text', { y: 50, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.manifesto', start: 'top 75%' } });
+  gsap.from('.manifesto-visual', { y: 50, opacity: 0, duration: 1, delay: 0.15, ease: 'power3.out', scrollTrigger: { trigger: '.manifesto', start: 'top 75%' } });
+  gsap.from('.fabric-item', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12, scrollTrigger: { trigger: '.fabric', start: 'top 75%' } });
+  gsap.from('.custom-inner', { y: 40, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.custom-order', start: 'top 80%' } });
+
+  // Zoom sutil en las imágenes de tarjeta al hacer scroll
+  gsap.utils.toArray('.card-visual .face img').forEach((img) => {
+    gsap.fromTo(img,
+      { scale: 1 },
+      { scale: 1.06, ease: 'none', scrollTrigger: { trigger: img, start: 'top bottom', end: 'bottom top', scrub: true } }
+    );
+  });
 
   function initTilt(stage) {
     if (isTouch) return;
+    const hero = stage.closest('.hero');
+    const intensity = hero ? 6 : 16; // tilt reducido en el hero (foto lifestyle)
     const rotY = gsap.quickTo(stage, 'rotationY', { duration: 0.5, ease: 'power3' });
     const rotX = gsap.quickTo(stage, 'rotationX', { duration: 0.5, ease: 'power3' });
     const posX = gsap.quickTo(stage, 'x', { duration: 0.6, ease: 'power3' });
@@ -369,10 +429,10 @@ function initAnimations() {
       const r = stage.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width - 0.5;
       const py = (e.clientY - r.top) / r.height - 0.5;
-      rotY(px * 16);
-      rotX(-py * 12);
-      posX(px * 10);
-      posY(py * 6);
+      rotY(px * intensity);
+      rotX(-py * intensity * 0.75);
+      posX(px * (hero ? 6 : 10));
+      posY(py * (hero ? 4 : 6));
     });
     stage.addEventListener('mouseleave', () => { rotY(0); rotX(0); posX(0); posY(0); });
   }

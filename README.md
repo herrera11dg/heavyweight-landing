@@ -6,7 +6,7 @@ Landing + tienda de camisetas de algodón pesado (serie gimnasio). HTML + CSS + 
 
 - **Parallax + tilt 3D** con GSAP/ScrollTrigger.
 - **Flip 3D** frontal/trasera (espalda visible primero, clic para girar).
-- **Tienda**: 6 productos a €35, selector de talla con stock, carrito persistente (`localStorage`).
+- **Tienda**: 5 diseños a €35 (Again, Discipline, Focus, One More Rep, Toji Fushiguro), selector de talla con stock, selector de color en Focus, carrito persistente (`localStorage`).
 - **Pago real**: Stripe Checkout vía `/api/checkout` + webhook de confirmación por email (Resend).
 - **Stock en servidor**: catálogo en `lib/products.js`, expuesto vía `GET /api/products`.
 - **Multilingüe**: pt-PT (principal), en, es — con `?lang=` en la URL y detección de navegador.

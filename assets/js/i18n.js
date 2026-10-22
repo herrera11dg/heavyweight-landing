@@ -14,20 +14,26 @@
       title_shipping: 'Envios e Devoluções — HeavyWeight',
 
       nav_shop: 'Loja',
+      nav_brand: 'A Marca',
       nav_shipping: 'Envios',
       nav_contact: 'Contacto',
       cart_label: 'Carrinho',
 
       hero_label: 'Made in Portugal / Algodão pesado',
       hero_title: 'Peso que se nota.',
-      hero_sub: 'T-shirts de algodão pesado, feitas para durar anos de treino.',
+      hero_title_a: 'Peso que',
+      hero_title_b: 'se nota.',
+      hero_sub: '240 GSM. BUILT TO LAST.',
+      hero_cta: 'Explorar coleção',
       flip_hint: 'Clica para ver a frente',
       scroll_hint: 'DESLIZE',
 
       shop_title: 'Coleção',
-      shop_count: '6 produtos',
+      shop_label: '— A COLEÇÃO —',
+      shop_count: '05 peças',
 
       best_seller: 'Mais vendido',
+      featured_badge: 'Destaque',
       stock_select: 'Seleciona um tamanho',
       stock_in: 'Em stock',
       stock_out: 'Esgotado',
@@ -38,9 +44,11 @@
       added: 'Adicionado',
       size_guide: 'Guia de tamanhos',
 
-      featured_name: 'Progress',
-      featured_desc: 'Corte boxy de referência. Algodão 240gsm. Impressão DTF de grande formato nas costas.',
+      featured_name: 'Toji Fushiguro',
+      featured_desc: 'Algodão pesado 240gsm com acabamento mineral wash. Estampa DTF de grande formato nas costas. Corte boxy.',
       add: 'Adicionar',
+      color_dark: 'Escuro',
+      color_wine: 'Vinotinto',
 
       sg_title: 'Guia de tamanhos',
       sg_sub: 'Medidas em centímetros. Corte boxy: recomendamos o teu tamanho habitual.',
@@ -85,6 +93,18 @@
       env3_title: 'Feito para durar',
       env3_text: 'Corte boxy e impressão DTF resistente.',
 
+      manifesto_label: '— A MARCA —',
+      manifesto_title: 'Não é uma t-shirt qualquer.',
+      manifesto_text: 'Algodão pesado de 240gsm. Acabamento mineral wash. Estampas DTF de grande formato. Feito para quem treina a sério.',
+
+      fabric_label: '— O TECIDO —',
+      fabric_title: 'Feito para durar.',
+      fabric_1_text: 'Algodão pesado de verdade.',
+      fabric_2_text: 'Acabamento lavado único.',
+      fabric_3_text: 'Caimento firme e confortável.',
+      fabric_4_text: 'Estampa de grande formato.',
+
+      custom_label: '— PERSONALIZAÇÃO —',
       custom_title: 'Não encontras o teu estilo?',
       custom_text: 'Pergunta-nos e analisamos o teu pedido. Podemos criar estampados e designs personalizados.',
       custom_cta: 'Fala connosco',
@@ -99,6 +119,7 @@
       footer_privacy: 'Política de privacidade',
       footer_rights: '© 2026 HeavyWeight. Todos os direitos reservados.',
       footer_tag: 'Algodão pesado · Envios para todo o país',
+      footer_tagline: 'BUILT FOR THE WORK · 240 GSM · DROP 001',
       footer_made: 'Projetado em Portugal.',
 
       back_home: '← Voltar à loja',
@@ -117,20 +138,26 @@
       title_shipping: 'Shipping & Returns — HeavyWeight',
 
       nav_shop: 'Shop',
+      nav_brand: 'The Brand',
       nav_shipping: 'Shipping',
       nav_contact: 'Contact',
       cart_label: 'Cart',
 
       hero_label: 'Made in Portugal / Heavy cotton',
       hero_title: 'Weight you feel.',
-      hero_sub: 'Heavy cotton t-shirts, built to last through years of training.',
+      hero_title_a: 'Weight you',
+      hero_title_b: 'feel.',
+      hero_sub: '240 GSM. BUILT TO LAST.',
+      hero_cta: 'Explore collection',
       flip_hint: 'Click to see the front',
       scroll_hint: 'SCROLL',
 
       shop_title: 'Collection',
-      shop_count: '6 products',
+      shop_label: '— THE COLLECTION —',
+      shop_count: '05 pieces',
 
       best_seller: 'Best seller',
+      featured_badge: 'Featured',
       stock_select: 'Select a size',
       stock_in: 'In stock',
       stock_out: 'Sold out',
@@ -141,9 +168,11 @@
       added: 'Added',
       size_guide: 'Size guide',
 
-      featured_name: 'Progress',
-      featured_desc: 'Our reference boxy fit. 240gsm cotton. Large-format DTF print on the back.',
+      featured_name: 'Toji Fushiguro',
+      featured_desc: 'Heavy 240gsm cotton with a mineral wash finish. Large-format DTF print on the back. Boxy fit.',
       add: 'Add',
+      color_dark: 'Dark',
+      color_wine: 'Wine',
 
       sg_title: 'Size guide',
       sg_sub: 'Measurements in centimetres. Boxy fit: we recommend your usual size.',
@@ -188,6 +217,18 @@
       env3_title: 'Built to last',
       env3_text: 'Boxy fit and durable DTF print.',
 
+      manifesto_label: '— THE BRAND —',
+      manifesto_title: 'Not just a t-shirt.',
+      manifesto_text: 'Heavy 240gsm cotton. Mineral wash finish. Large-format DTF prints. Made for those who train hard.',
+
+      fabric_label: '— THE FABRIC —',
+      fabric_title: 'Built to last.',
+      fabric_1_text: 'Real heavy cotton.',
+      fabric_2_text: 'Unique washed finish.',
+      fabric_3_text: 'Firm and comfortable drape.',
+      fabric_4_text: 'Large format print.',
+
+      custom_label: '— CUSTOM —',
       custom_title: "Can't find your style?",
       custom_text: 'Ask us and we will review your request. We can create custom prints and designs.',
       custom_cta: 'Get in touch',
@@ -202,6 +243,7 @@
       footer_privacy: 'Privacy policy',
       footer_rights: '© 2026 HeavyWeight. All rights reserved.',
       footer_tag: 'Heavy cotton · Ships across Europe',
+      footer_tagline: 'BUILT FOR THE WORK · 240 GSM · DROP 001',
       footer_made: 'Designed in Portugal.',
 
       back_home: '← Back to shop',
@@ -220,20 +262,26 @@
       title_shipping: 'Envíos y Devoluciones — HeavyWeight',
 
       nav_shop: 'Tienda',
+      nav_brand: 'La Marca',
       nav_shipping: 'Envíos',
       nav_contact: 'Contacto',
       cart_label: 'Carrito',
 
       hero_label: 'Made in Portugal / Algodón pesado',
       hero_title: 'Peso que se nota.',
-      hero_sub: 'Camisetas de algodón pesado, hechas para durar años de entrenamiento.',
+      hero_title_a: 'Peso que',
+      hero_title_b: 'se nota.',
+      hero_sub: '240 GSM. BUILT TO LAST.',
+      hero_cta: 'Explorar colección',
       flip_hint: 'Clic para ver el frente',
       scroll_hint: 'DESLIZA',
 
       shop_title: 'Colección',
-      shop_count: '6 productos',
+      shop_label: '— LA COLECCIÓN —',
+      shop_count: '05 piezas',
 
       best_seller: 'Best seller',
+      featured_badge: 'Destacado',
       stock_select: 'Selecciona una talla',
       stock_in: 'En stock',
       stock_out: 'Agotado',
@@ -244,9 +292,11 @@
       added: 'Agregado',
       size_guide: 'Guía de tallas',
 
-      featured_name: 'Progress',
-      featured_desc: 'Nuestro corte boxy de referencia. Algodón 240gsm. Impresión DTF de gran formato en la espalda.',
+      featured_name: 'Toji Fushiguro',
+      featured_desc: 'Algodón pesado de 240gsm con acabado mineral wash. Impresión DTF de gran formato en la espalda. Corte boxy.',
       add: 'Agregar',
+      color_dark: 'Oscuro',
+      color_wine: 'Vinotinto',
 
       sg_title: 'Guía de tallas',
       sg_sub: 'Medidas en centímetros. Corte boxy: recomendamos tu talla habitual.',
@@ -291,6 +341,18 @@
       env3_title: 'Hecho para durar',
       env3_text: 'Corte boxy e impresión DTF resistente.',
 
+      manifesto_label: '— LA MARCA —',
+      manifesto_title: 'No es una camiseta cualquiera.',
+      manifesto_text: 'Algodón pesado de 240gsm. Acabado mineral wash. Estampas DTF de gran formato. Hecho para quien entrena en serio.',
+
+      fabric_label: '— EL TEJIDO —',
+      fabric_title: 'Hecho para durar.',
+      fabric_1_text: 'Algodón pesado de verdad.',
+      fabric_2_text: 'Acabado lavado único.',
+      fabric_3_text: 'Caída firme y cómoda.',
+      fabric_4_text: 'Estampa de gran formato.',
+
+      custom_label: '— PERSONALIZACIÓN —',
       custom_title: '¿No encuentras tu estilo?',
       custom_text: 'Pregúntanos y revisamos tu pedido. Podemos crear estampados y diseños personalizados.',
       custom_cta: 'Escríbenos',
@@ -305,6 +367,7 @@
       footer_privacy: 'Política de privacidad',
       footer_rights: '© 2026 HeavyWeight. Todos los derechos reservados.',
       footer_tag: 'Algodón pesado · Envíos a todo el país',
+      footer_tagline: 'BUILT FOR THE WORK · 240 GSM · DROP 001',
       footer_made: 'Diseñado en Portugal.',
 
       back_home: '← Volver a la tienda',

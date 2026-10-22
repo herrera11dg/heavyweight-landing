@@ -28,12 +28,11 @@
   "paymentAccepted": "Cartão de crédito, Apple Pay, Google Pay",
   "priceRange": "€35",
   "itemListElement": [
-    {"@type": "Product", "position": 1, "name": "Progress", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}},
-    {"@type": "Product", "position": 2, "name": "Again", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}},
+    {"@type": "Product", "position": 1, "name": "Again", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}},
+    {"@type": "Product", "position": 2, "name": "Discipline", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}},
     {"@type": "Product", "position": 3, "name": "Focus", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}},
-    {"@type": "Product", "position": 4, "name": "Gojo", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}},
-    {"@type": "Product", "position": 5, "name": "Toji", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}},
-    {"@type": "Product", "position": 6, "name": "One More Rep", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}}
+    {"@type": "Product", "position": 4, "name": "One More Rep", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}},
+    {"@type": "Product", "position": 5, "name": "Toji Fushiguro", "offers": {"@type": "Offer", "price": "35.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock"}}
   ]
 }
 </script>
@@ -44,18 +43,18 @@
 <meta property="og:title" content="HeavyWeight — Peso que se nota" data-i18n-content="og_title">
 <meta property="og:description" content="T-shirts portuguesas de algodão pesado para anos de treino." data-i18n-content="meta_desc">
 <meta property="og:url" content="https://heavyweight-sigma.vercel.app/">
-<meta property="og:image" content="https://heavyweight-sigma.vercel.app/assets/img/trasera.png">
+<meta property="og:image" content="https://heavyweight-sigma.vercel.app/assets/img/toji-fushiguro-back.webp">
 <meta property="og:locale" content="pt_PT">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HeavyWeight — Peso que se nota" data-i18n-content="og_title">
 <meta name="twitter:description" content="T-shirts portuguesas de algodão pesado para anos de treino." data-i18n-content="meta_desc">
-<meta name="twitter:image" content="https://heavyweight-sigma.vercel.app/assets/img/trasera.png">
+<meta name="twitter:image" content="https://heavyweight-sigma.vercel.app/assets/img/toji-fushiguro-back.webp">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-<link rel="apple-touch-icon" href="assets/img/trasera.png">
+<link rel="apple-touch-icon" href="assets/img/toji-fushiguro-back.webp">
 
 <!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +72,7 @@
     <a href="#inicio" class="nav-mark">Heavy<em>Weight</em></a>
     <div class="nav-links">
       <a href="#colecao" data-i18n="nav_shop">Loja</a>
-      <a href="#envios" data-i18n="nav_shipping">Envios</a>
+      <a href="#lookbook" data-i18n="nav_brand">A Marca</a>
       <a href="#contacto" data-i18n="nav_contact">Contacto</a>
     </div>
     <div class="nav-right">
@@ -92,42 +91,45 @@
 
 <!-- HERO -->
 <section class="hero" id="inicio">
-  <div class="hero-top">
-    <p class="hero-label" data-i18n="hero_label">Made in Portugal / Algodão pesado</p>
-    <h1 class="hero-title" data-i18n="hero_title">Peso que se nota.</h1>
-    <p class="hero-sub" data-i18n="hero_sub">T-shirts de algodão pesado, feitas para durar anos de treino.</p>
-  </div>
+  <span class="hero-drop">DROP 001 · PORTUGAL · HEAVY COTTON</span>
+
+  <h1 class="hero-title">
+    <span data-i18n="hero_title_a">Peso que</span><br>
+    <span data-i18n="hero_title_b">se nota.</span>
+  </h1>
 
   <div class="hero-shirt">
     <div class="shirt-stage js-tilt">
-      <div class="hero-glow"></div>
-      <div class="shirt-zoom js-zoom">
-        <div class="shirt-flip js-flip">
-          <div class="shirt-face back">
-            <picture>
-              <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
-              <img src="assets/img/trasera.png" alt="T-shirt HeavyWeight One More Rep vista traseira" width="377" height="502" fetchpriority="high">
-            </picture>
-          </div>
-          <div class="shirt-face front">
-            <picture>
-              <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
-              <img src="assets/img/frontal.png" alt="T-shirt HeavyWeight One More Rep vista frontal" width="377" height="502" loading="lazy">
-            </picture>
-          </div>
+      <div class="shirt-flip js-flip">
+        <div class="shirt-face back">
+          <picture>
+            <source type="image/webp" srcset="assets/img/toji-fushiguro-back.webp 1x, assets/img/toji-fushiguro-back@2x.webp 2x">
+            <img src="assets/img/toji-fushiguro-back.webp" alt="T-shirt HeavyWeight Toji Fushiguro vista traseira" width="600" height="750" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="shirt-face front">
+          <picture>
+            <source type="image/webp" srcset="assets/img/toji-fushiguro-front.webp 1x, assets/img/toji-fushiguro-front@2x.webp 2x">
+            <img src="assets/img/toji-fushiguro-front.webp" alt="T-shirt HeavyWeight Toji Fushiguro vista frontal" width="600" height="750" loading="lazy">
+          </picture>
         </div>
       </div>
     </div>
   </div>
 
+  <p class="hero-sub" data-i18n="hero_sub">240 GSM. BUILT TO LAST.</p>
+  <a href="#colecao" class="hero-cta" data-i18n="hero_cta">Explorar coleção</a>
   <p class="flip-hint" data-i18n="flip_hint">Clica para ver a frente</p>
 </section>
 
 <!-- COLEÇÃO -->
 <section class="shop" id="colecao">
   <div class="shop-head">
-    <h2 data-i18n="shop_title">Coleção</h2>
-    <span data-i18n="shop_count">06 produtos</span>
+    <div>
+      <span class="section-label" data-i18n="shop_label">— A COLEÇÃO —</span>
+      <h2 data-i18n="shop_title">Coleção</h2>
+    </div>
+    <span data-i18n="shop_count">05 peças</span>
   </div>
 
   <!-- Destacado -->
@@ -136,14 +138,14 @@
       <div class="flip js-flip">
         <div class="face back">
           <picture>
-            <source type="image/webp" srcset="assets/img/progress-trasera.webp 1x, assets/img/progress-trasera@2x.webp 2x">
-            <img src="assets/img/progress-trasera.png" alt="T-shirt Progress vista traseira" width="393" height="481" loading="lazy">
+            <source type="image/webp" srcset="assets/img/toji-fushiguro-back.webp 1x, assets/img/toji-fushiguro-back@2x.webp 2x">
+            <img src="assets/img/toji-fushiguro-back.webp" alt="T-shirt Toji Fushiguro vista traseira" width="600" height="750" loading="lazy">
           </picture>
         </div>
         <div class="face front">
           <picture>
-            <source type="image/webp" srcset="assets/img/progress-frente.webp 1x, assets/img/progress-frente@2x.webp 2x">
-            <img src="assets/img/progress-frente.png" alt="T-shirt Progress vista frontal" width="399" height="491" loading="lazy">
+            <source type="image/webp" srcset="assets/img/toji-fushiguro-front.webp 1x, assets/img/toji-fushiguro-front@2x.webp 2x">
+            <img src="assets/img/toji-fushiguro-front.webp" alt="T-shirt Toji Fushiguro vista frontal" width="600" height="750" loading="lazy">
           </picture>
         </div>
       </div>
@@ -151,11 +153,11 @@
     </div>
 
     <div class="featured-info">
-      <span class="cat" data-i18n="best_seller">Mais vendido</span>
-      <h3 data-i18n="featured_name">Progress</h3>
+      <span class="cat" data-i18n="featured_badge">Destaque</span>
+      <h3 data-i18n="featured_name">Toji Fushiguro</h3>
       <div class="price" id="featured-price">35,00 €</div>
       <div class="stock-badge" id="stock-badge">Seleciona um tamanho</div>
-      <p class="desc" data-i18n="featured_desc">Corte boxy de referência. Algodão 240gsm. Impressão DTF de grande formato nas costas.</p>
+      <p class="desc" data-i18n="featured_desc">Algodão pesado 240gsm com acabamento mineral wash. Estampa DTF de grande formato nas costas. Corte boxy.</p>
 
       <div class="buy-row" style="align-items:center; justify-content:space-between;">
         <span class="opt-label" id="size-label" style="margin:0;" data-i18n="size_label">Tamanho</span>
@@ -169,26 +171,26 @@
 
   <!-- Grid -->
   <div class="grid">
-    <article class="card">
+    <article class="card" data-drop="001">
       <div class="card-visual js-tilt">
         <div class="flip js-flip">
           <div class="face back">
             <picture>
-              <source type="image/webp" srcset="assets/img/again-trasera.webp 1x, assets/img/again-trasera@2x.webp 2x">
-              <img src="assets/img/again-trasera.png" alt="T-shirt Again vista traseira" width="517" height="457" loading="lazy">
+              <source type="image/webp" srcset="assets/img/again-back.webp 1x, assets/img/again-back@2x.webp 2x">
+              <img src="assets/img/again-back.webp" alt="T-shirt Again vista traseira" width="600" height="750" loading="lazy">
             </picture>
           </div>
           <div class="face front">
             <picture>
-              <source type="image/webp" srcset="assets/img/again-frente.webp 1x, assets/img/again-frente@2x.webp 2x">
-              <img src="assets/img/again-frente.png" alt="T-shirt Again vista frontal" width="399" height="491" loading="lazy">
+              <source type="image/webp" srcset="assets/img/again-front.webp 1x, assets/img/again-front@2x.webp 2x">
+              <img src="assets/img/again-front.webp" alt="T-shirt Again vista frontal" width="600" height="750" loading="lazy">
             </picture>
           </div>
         </div>
       </div>
       <div class="card-info">
         <div>
-          <div class="card-meta">240 GSM</div>
+          <div class="card-meta">240 GSM · DROP 001</div>
           <h3 class="card-name">Again</h3>
           <div class="card-price" data-price="again">35,00 €</div>
         </div>
@@ -196,143 +198,174 @@
       </div>
     </article>
 
-    <article class="card">
+    <article class="card" data-drop="002">
       <div class="card-visual js-tilt">
         <div class="flip js-flip">
           <div class="face back">
             <picture>
-              <source type="image/webp" srcset="assets/img/focus-trasera.webp 1x, assets/img/focus-trasera@2x.webp 2x">
-              <img src="assets/img/focus-trasera.png" alt="T-shirt Focus vista traseira" width="400" height="523" loading="lazy">
+              <source type="image/webp" srcset="assets/img/discipline-back.webp 1x, assets/img/discipline-back@2x.webp 2x">
+              <img src="assets/img/discipline-back.webp" alt="T-shirt Discipline vista traseira" width="600" height="750" loading="lazy">
             </picture>
           </div>
           <div class="face front">
             <picture>
-              <source type="image/webp" srcset="assets/img/focus-frente.webp 1x, assets/img/focus-frente@2x.webp 2x">
-              <img src="assets/img/focus-frente.png" alt="T-shirt Focus vista frontal" width="399" height="491" loading="lazy">
+              <source type="image/webp" srcset="assets/img/discipline-front.webp 1x, assets/img/discipline-front@2x.webp 2x">
+              <img src="assets/img/discipline-front.webp" alt="T-shirt Discipline vista frontal" width="600" height="750" loading="lazy">
             </picture>
           </div>
         </div>
       </div>
       <div class="card-info">
         <div>
-          <div class="card-meta">240 GSM</div>
+          <div class="card-meta">240 GSM · DROP 002</div>
+          <h3 class="card-name">Discipline</h3>
+          <div class="card-price" data-price="discipline">35,00 €</div>
+        </div>
+        <button class="add" data-product="discipline" data-i18n="add" aria-label="Adicionar Discipline ao carrinho">Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card" data-drop="003">
+      <div class="card-visual js-tilt">
+        <div class="flip js-flip">
+          <div class="face back">
+            <picture>
+              <source type="image/webp" srcset="assets/img/focus-back.webp 1x, assets/img/focus-back@2x.webp 2x">
+              <img src="assets/img/focus-back.webp" alt="T-shirt Focus vista traseira" width="600" height="750" loading="lazy">
+            </picture>
+          </div>
+          <div class="face front">
+            <picture>
+              <source type="image/webp" srcset="assets/img/focus-front.webp 1x, assets/img/focus-front@2x.webp 2x">
+              <img src="assets/img/focus-front.webp" alt="T-shirt Focus vista frontal" width="600" height="750" loading="lazy">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div>
+          <div class="card-meta">240 GSM · DROP 003</div>
           <h3 class="card-name">Focus</h3>
           <div class="card-price" data-price="focus">35,00 €</div>
+          <div class="card-colors" data-color-product="focus">
+            <button class="color-swatch active" data-color="dark" style="--swatch:#2b2b2b;" aria-label="Escuro"></button>
+            <button class="color-swatch" data-color="vinotinto" style="--swatch:#5a2533;" aria-label="Vinotinto"></button>
+          </div>
         </div>
         <button class="add" data-product="focus" data-i18n="add" aria-label="Adicionar Focus ao carrinho">Adicionar</button>
       </div>
     </article>
 
-    <article class="card">
+    <article class="card" data-drop="004">
       <div class="card-visual js-tilt">
         <div class="flip js-flip">
           <div class="face back">
             <picture>
-              <source type="image/webp" srcset="assets/img/gojo-trasera.webp 1x, assets/img/gojo-trasera@2x.webp 2x">
-              <img src="assets/img/gojo-trasera.png" alt="T-shirt Gojo vista traseira" width="425" height="530" loading="lazy">
+              <source type="image/webp" srcset="assets/img/one-more-rep-back.webp 1x, assets/img/one-more-rep-back@2x.webp 2x">
+              <img src="assets/img/one-more-rep-back.webp" alt="T-shirt One More Rep vista traseira" width="600" height="750" loading="lazy">
             </picture>
           </div>
           <div class="face front">
             <picture>
-              <source type="image/webp" srcset="assets/img/gojo-frente.webp 1x, assets/img/gojo-frente@2x.webp 2x">
-              <img src="assets/img/gojo-frente.png" alt="T-shirt Gojo vista frontal" width="399" height="508" loading="lazy">
+              <source type="image/webp" srcset="assets/img/one-more-rep-front.webp 1x, assets/img/one-more-rep-front@2x.webp 2x">
+              <img src="assets/img/one-more-rep-front.webp" alt="T-shirt One More Rep vista frontal" width="600" height="750" loading="lazy">
             </picture>
           </div>
         </div>
       </div>
       <div class="card-info">
         <div>
-          <div class="card-meta">240 GSM</div>
-          <h3 class="card-name">Gojo</h3>
-          <div class="card-price" data-price="gojo">35,00 €</div>
-        </div>
-        <button class="add" data-product="gojo" data-i18n="add" aria-label="Adicionar Gojo ao carrinho">Adicionar</button>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-visual js-tilt">
-        <div class="flip js-flip">
-          <div class="face back">
-            <picture>
-              <source type="image/webp" srcset="assets/img/toji-trasera.webp 1x, assets/img/toji-trasera@2x.webp 2x">
-              <img src="assets/img/toji-trasera.png" alt="T-shirt Toji vista traseira" width="376" height="502" loading="lazy">
-            </picture>
-          </div>
-          <div class="face front">
-            <picture>
-              <source type="image/webp" srcset="assets/img/toji-frente.webp 1x, assets/img/toji-frente@2x.webp 2x">
-              <img src="assets/img/toji-frente.png" alt="T-shirt Toji vista frontal" width="399" height="468" loading="lazy">
-            </picture>
-          </div>
-        </div>
-      </div>
-      <div class="card-info">
-        <div>
-          <div class="card-meta">240 GSM</div>
-          <h3 class="card-name">Toji</h3>
-          <div class="card-price" data-price="toji">35,00 €</div>
-        </div>
-        <button class="add" data-product="toji" data-i18n="add" aria-label="Adicionar Toji ao carrinho">Adicionar</button>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="card-visual js-tilt">
-        <div class="flip js-flip">
-          <div class="face back">
-            <picture>
-              <source type="image/webp" srcset="assets/img/trasera.webp 1x, assets/img/trasera@2x.webp 2x">
-              <img src="assets/img/trasera.png" alt="T-shirt One More Rep vista traseira" width="377" height="502" loading="lazy">
-            </picture>
-          </div>
-          <div class="face front">
-            <picture>
-              <source type="image/webp" srcset="assets/img/frontal.webp 1x, assets/img/frontal@2x.webp 2x">
-              <img src="assets/img/frontal.png" alt="T-shirt One More Rep vista frontal" width="377" height="502" loading="lazy">
-            </picture>
-          </div>
-        </div>
-      </div>
-      <div class="card-info">
-        <div>
-          <div class="card-meta">240 GSM</div>
+          <div class="card-meta">240 GSM · DROP 004</div>
           <h3 class="card-name">One More Rep</h3>
           <div class="card-price" data-price="one-more-rep">35,00 €</div>
         </div>
         <button class="add" data-product="one-more-rep" data-i18n="add" aria-label="Adicionar One More Rep ao carrinho">Adicionar</button>
       </div>
     </article>
+
+    <article class="card" data-drop="005">
+      <div class="card-visual js-tilt">
+        <div class="flip js-flip">
+          <div class="face back">
+            <picture>
+              <source type="image/webp" srcset="assets/img/toji-fushiguro-back.webp 1x, assets/img/toji-fushiguro-back@2x.webp 2x">
+              <img src="assets/img/toji-fushiguro-back.webp" alt="T-shirt Toji Fushiguro vista traseira" width="600" height="750" loading="lazy">
+            </picture>
+          </div>
+          <div class="face front">
+            <picture>
+              <source type="image/webp" srcset="assets/img/toji-fushiguro-front.webp 1x, assets/img/toji-fushiguro-front@2x.webp 2x">
+              <img src="assets/img/toji-fushiguro-front.webp" alt="T-shirt Toji Fushiguro vista frontal" width="600" height="750" loading="lazy">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div>
+          <div class="card-meta">240 GSM · DROP 005</div>
+          <h3 class="card-name">Toji Fushiguro</h3>
+          <div class="card-price" data-price="toji-fushiguro">35,00 €</div>
+        </div>
+        <button class="add" data-product="toji-fushiguro" data-i18n="add" aria-label="Adicionar Toji Fushiguro ao carrinho">Adicionar</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- LOOKBOOK / MANIFESTO -->
+<section class="manifesto" id="lookbook">
+  <div class="manifesto-inner">
+    <div class="manifesto-text">
+      <span class="section-label" data-i18n="manifesto_label">— A MARCA —</span>
+      <h2 data-i18n="manifesto_title">Não é uma t-shirt qualquer.</h2>
+      <p data-i18n="manifesto_text">Algodão pesado de 240gsm. Acabamento mineral wash. Estampas DTF de grande formato. Feito para quem treina a sério.</p>
+    </div>
+    <div class="manifesto-visual">
+      <picture>
+        <source type="image/webp" srcset="assets/img/lookbook.webp 1x, assets/img/lookbook@2x.webp 2x">
+        <img src="assets/img/lookbook.webp" alt="Coleção HeavyWeight" width="1200" height="800" loading="lazy">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- TECIDO -->
+<section class="fabric" id="fabric">
+  <div class="fabric-head">
+    <span class="section-label" data-i18n="fabric_label">— O TECIDO —</span>
+    <h2 data-i18n="fabric_title">Feito para durar.</h2>
+  </div>
+  <div class="fabric-grid">
+    <div class="fabric-item">
+      <span class="num">01</span>
+      <h3>240 GSM</h3>
+      <p data-i18n="fabric_1_text">Algodão pesado de verdade.</p>
+    </div>
+    <div class="fabric-item">
+      <span class="num">02</span>
+      <h3>MINERAL WASH</h3>
+      <p data-i18n="fabric_2_text">Acabamento lavado único.</p>
+    </div>
+    <div class="fabric-item">
+      <span class="num">03</span>
+      <h3>CORTE BOXY</h3>
+      <p data-i18n="fabric_3_text">Caimento firme e confortável.</p>
+    </div>
+    <div class="fabric-item">
+      <span class="num">04</span>
+      <h3>DTF PRINT</h3>
+      <p data-i18n="fabric_4_text">Estampa de grande formato.</p>
+    </div>
   </div>
 </section>
 
 <!-- PERSONALIZAÇÃO -->
 <section class="custom-order" id="personalizar">
   <div class="custom-inner">
+    <span class="section-label" data-i18n="custom_label">— PERSONALIZAÇÃO —</span>
     <h2 data-i18n="custom_title">Não encontras o teu estilo?</h2>
     <p data-i18n="custom_text">Pergunta-nos e analisamos o teu pedido. Podemos criar estampados e designs personalizados.</p>
     <a href="mailto:hello@heavyweight.pt" class="buy-btn" data-i18n="custom_cta">Fala connosco</a>
-  </div>
-</section>
-
-<!-- ENVIOS -->
-<section class="envios" id="envios">
-  <div class="envios-grid">
-    <div class="envio-item">
-      <span class="num">01</span>
-      <h3 data-i18n="env1_title">Envio nacional</h3>
-      <p data-i18n="env1_text">2–4 dias úteis em Portugal Continental.</p>
-    </div>
-    <div class="envio-item">
-      <span class="num">02</span>
-      <h3 data-i18n="env2_title">Peso real</h3>
-      <p data-i18n="env2_text">Algodão pesado de 240gsm.</p>
-    </div>
-    <div class="envio-item">
-      <span class="num">03</span>
-      <h3 data-i18n="env3_title">Feito para durar</h3>
-      <p data-i18n="env3_text">Corte boxy e impressão DTF resistente.</p>
-    </div>
   </div>
 </section>
 
@@ -366,6 +399,7 @@
   </div>
   <div class="footer-bottom">
     <span data-i18n="footer_rights">© 2026 HeavyWeight. Todos os direitos reservados.</span>
+    <span class="footer-tagline" data-i18n="footer_tagline">BUILT FOR THE WORK · 240 GSM · DROP 001</span>
     <span data-i18n="footer_made">Projetado em Portugal.</span>
   </div>
 </footer>
@@ -454,7 +488,7 @@
 
 <!-- Botón de compra móvil -->
 <div class="mobile-buy" id="mobile-buy">
-  <button class="buy-btn" id="mobile-buy-btn">Adicionar Progress · 35,00 €</button>
+  <button class="buy-btn" id="mobile-buy-btn">Adicionar Toji Fushiguro · 35,00 €</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
